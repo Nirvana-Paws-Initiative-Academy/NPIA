@@ -1,3 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Markazi Text", serif;
+  background-color: hsl(156, 100%, 99%);
+}
+body {
+  cursor: url("/curosr.cur"), default; /* Custom cursor */
+  /* cursor: url("/pointer.cur"), pointer; */
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Hide scrollbar for all browsers */
+::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+body {
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  scrollbar-width: none; /* Firefox */
+}

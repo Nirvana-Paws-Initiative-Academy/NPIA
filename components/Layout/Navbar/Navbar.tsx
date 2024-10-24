@@ -24,12 +24,17 @@ const ROUTES = [
     name: "Contact Us",
     path: "/contact-us",
   },
+  {
+    id: "5",
+    name: "Track Donation",
+    path: "/contact-us",
+  },
 ];
 
 export const Navbar = () => {
   const randomId = "445464";
   return (
-    <nav className="flex justify-between items-center  py-2">
+    <nav className="flex justify-between items-center  py-2 bg-[#fafffd]">
       <div className="logo">
         <Image
           src={logoImg}

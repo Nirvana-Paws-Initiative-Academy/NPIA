@@ -34,9 +34,9 @@ const Button: React.FunctionComponent<ButtonProps> = ({
 
         //style based on variant
         variant === "primary" &&
-          `bg-[#4B714C] ${hover} active:scale-90 text-[#FAFFFD]  font-[400] transition duration-200 hover:bg-transparent hover:border hover:border-green-700 hover:text-green-700`,
+          `bg-[#4B714C] ${hover} active:scale-90 text-[#FAFFFD] font-[400] transition duration-200 hover:bg-transparent border hover:border-green-950 hover:text-green-700 clickable`,
         variant === "secondary" &&
-          `bg-zinc-800 ${hover} active:scale-90 text-white tracking-tighter`,
+          `bg-zinc-800 ${hover} active:scale-90 text-white tracking-tighter clickable`,
 
         // style based on isStretched
         isStretched && "w-full"

@@ -28,7 +28,7 @@ export default function Home() {
       </section>
       <CommonSection
         title="Only 1 in 5 Stray Puppies Make It"
-        description="In the bustling streets of India, millions of stray puppies face a daily struggle for survival. Sadly, only a fraction of these vulnerable creatures reach adulthood. Disease, hunger, accidents, and cruelty claim far too many young lives. Nirvana Paws Initiative & Academy is dedicated to changing this reality."
+        description="In the bustling streets of India, millions of stray puppies face a daily struggle for survival. Sadly, only a fraction of these vulnerable creatures reach adulthood. Disease, hunger, accidents, and cruelty claim far too many young lives. Nirvana Paws Initiative & Academy is dedicated to changing this reality. Just for checking"
         withImage
         src={fact1}
       />

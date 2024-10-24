@@ -5,29 +5,29 @@ import Button from "@/components/UI/Button";
 
 const ROUTES = [
   {
-    id: 1,
+    id: "1",
     name: "Home",
     path: "/",
   },
   {
-    id: 2,
+    id: "2",
     name: "About us",
     path: "/about",
   },
   {
-    id: 3,
+    id: "3",
     name: "Our Programs",
     path: "/our-programs",
   },
   {
-    id: 4,
+    id: "4",
     name: "Contact Us",
     path: "/contact-us",
   },
 ];
 
 export const Navbar = () => {
-  const randomId = 445464;
+  const randomId = "445464";
   return (
     <nav className="flex justify-between items-center  py-2">
       <div className="logo">

@@ -1,6 +1,5 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import { Icon } from "./Icons";
 
 interface CommonSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;

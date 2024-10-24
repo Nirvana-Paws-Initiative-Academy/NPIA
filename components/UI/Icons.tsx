@@ -1,9 +1,8 @@
 interface IconsProps {
   name: string;
-  active?: boolean;
 }
 
-export const Icon: React.FunctionComponent<IconsProps> = ({ name, active }) => {
+export const Icon: React.FunctionComponent<IconsProps> = ({ name }) => {
   switch (name) {
     case "Life Transformations":
       return (

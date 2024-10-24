@@ -4,7 +4,6 @@ import Button from "@/components/UI/Button";
 import { CommonSection } from "@/components/UI/CommonSection";
 import fact1 from "@/public/fact-1.webp";
 import { Icon } from "@/components/UI/Icons";
-import { CircleArrowOutUpRight } from "lucide-react";
 
 const GOALS_DATA = [
   {

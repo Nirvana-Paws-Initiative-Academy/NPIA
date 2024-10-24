@@ -26,7 +26,8 @@ const Card: React.FunctionComponent<CardProps> = ({
         // style based on sizes
         size === "small" && "px-1 py-1 rounded-md gap-1.5 shadow-sm",
         size === "medium" && "px-6 py-2 rounded-lg gap-2 shadow-md",
-        size === "large" && "px-7 py-2 rounded-xl gap-2.5 shadow-lg"
+        size === "large" &&
+          `px-7 py-2 rounded-xl ${hover ? "hover:block" : ""} gap-2.5 shadow-lg`
       )}
       aria-label={label}
       id={id}

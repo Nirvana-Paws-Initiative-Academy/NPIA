@@ -550,6 +550,6 @@ export const Icon: React.FunctionComponent<IconsProps> = ({ name }) => {
         </svg>
       );
     default:
-      null;
+      break;
   }
 };

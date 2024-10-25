@@ -19,9 +19,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "NPIA - Nirvana Paws Initiative & Academy",
+  title: "NPIA - Every Puppy Deserves A Future | Every Second Counts",
   description:
-    "Every Puppy Deserves A Future | Join The Fight To Save Innocent Lives",
+    "NPIA is dedicated to rescuing, rehabilitating, and finding loving homes for these vulnerable animals join us in our mis",
 };
 
 const ROUTES = [
@@ -75,12 +75,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="favicon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="icon.ico" type="image/x-icon" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="container px-4 m-auto fixed top-0 z-50 left-0 right-0">
+        <header className="container px-4 m-auto fixed top-0 z-50 left-0 right-0 w-full">
           <Navbar />
         </header>
         <main aria-label="Page Content" className="px-4 py-2 m-auto">
@@ -130,7 +130,7 @@ export default function RootLayout({
           </div>
 
           <div className="footer_links">
-            <ul className="flex items-center justify-around gap-8 w-full">
+            <ul className="flex items-center justify-around gap-8 w-full flex-col sm:flex-row">
               {ROUTES.map((route) => (
                 <li key={route.id}>
                   <Link

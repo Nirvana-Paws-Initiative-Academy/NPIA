@@ -83,3 +83,5 @@ export const CommonSection = forwardRef<HTMLDivElement, CommonSectionProps>(
     );
   }
 );
+
+CommonSection.displayName = "CommonSection";

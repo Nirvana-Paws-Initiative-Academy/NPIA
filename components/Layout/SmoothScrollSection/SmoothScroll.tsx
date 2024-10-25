@@ -112,7 +112,13 @@ const SmoothScrollSections = ({
       container.removeEventListener("touchstart", handleTouchStart);
       container.removeEventListener("touchmove", handleTouchMove);
     };
-  }, [currentSection, isScrolling, scrollDuration, scrollThreshold]);
+  }, [
+    currentSection,
+    isScrolling,
+    scrollDuration,
+    scrollThreshold,
+    scrollToSection,
+  ]);
 
   // Wrap each child in a section div
   const wrappedChildren = React.Children.map(children, (child) => (

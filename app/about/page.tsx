@@ -201,8 +201,8 @@ const page = () => {
       <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-8">
         <div className="flex items-center justify-center flex-col gap-2">
           <h2 className="text-[#4B714C] text-4xl font-bold">Our Core Values</h2>
-          <p className="text-[#8DB68E] text-xl font-medium">
-            The core principles that guide NPIA' s work
+          <p className="text-[#8DB68E] text-xl font-medium capitalize">
+            The core Principles that guide NPIA' s work
           </p>
         </div>
 

@@ -29,7 +29,7 @@ const DATA = [
   },
 ];
 
-const page = () => {
+const Page = () => {
   // Define the options data with exact key types
   const optionsData = {
     "The Spark": {
@@ -225,4 +225,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

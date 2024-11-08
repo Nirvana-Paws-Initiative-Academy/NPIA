@@ -83,10 +83,11 @@ export default function RootLayout({
         <header className="container px-4 m-auto fixed top-0 z-50 left-0 right-0 w-full">
           <Navbar />
         </header>
+
         <main aria-label="Page Content" className="px-4 py-2 m-auto">
           {children}
         </main>
-        <footer className="flex items-start sm:items-center flex-col gap-8 border-b-[20px] border-[#4B714C]">
+        <footer className="flex items-start sm:items-center flex-col border-b-[20px] border-[#4B714C] gap-8 mt-10">
           <div className="logo_img">
             <Image
               src={footerImg}

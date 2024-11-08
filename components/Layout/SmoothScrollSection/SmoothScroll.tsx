@@ -1,142 +1,49 @@
-"use client";
+import { useEffect, useRef, useState, ReactNode } from "react";
+import { useRouter } from "next/router";
 
-import React, { ReactNode, useEffect, useRef, useState } from "react";
-
-interface SmoothScrollSectionsProps {
+interface ScrollableSectionProps {
   children: ReactNode;
-  scrollDuration?: number;
-  scrollThreshold?: number;
+  id: string;
 }
 
-const SmoothScrollSections = ({
+const ScrollableSection: React.FC<ScrollableSectionProps> = ({
   children,
-  scrollDuration = 1000,
-  scrollThreshold = 50,
-}: SmoothScrollSectionsProps): JSX.Element => {
-  const [currentSection, setCurrentSection] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const lastScrollTime = useRef<number>(0);
-  const lastTouchY = useRef<number>(0);
-
-  const scrollToSection = (index: number) => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const sections = Array.from(container.getElementsByClassName("section"));
-    if (index < 0 || index >= sections.length) return;
-
-    setIsScrolling(true);
-    setCurrentSection(index);
-    lastScrollTime.current = Date.now();
-
-    setTimeout(() => {
-      setIsScrolling(false);
-    }, scrollDuration);
-  };
+  id,
+}) => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    window.scrollTo(0, 0); // Scroll to the top of the page on mount
+  }, []);
 
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-
-      if (isScrolling) return;
-
-      const now = Date.now();
-      if (now - lastScrollTime.current < scrollDuration) return;
-
-      const isScrollingDown = e.deltaY > 0;
-
-      if (Math.abs(e.deltaY) < scrollThreshold) return;
-
-      const sections = Array.from(container.getElementsByClassName("section"));
-      const newSection = isScrollingDown
-        ? Math.min(currentSection + 1, sections.length - 1)
-        : Math.max(currentSection - 1, 0);
-
-      if (newSection !== currentSection) {
-        scrollToSection(newSection);
-      }
-    };
-
-    const handleTouchStart = (e: TouchEvent) => {
-      lastTouchY.current = e.touches[0].clientY;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (isScrolling) {
-        e.preventDefault();
-        return;
-      }
-
-      const touchY = e.touches[0].clientY;
-      const deltaY = lastTouchY.current - touchY;
-
-      if (Math.abs(deltaY) > scrollThreshold) {
-        e.preventDefault();
-
-        const now = Date.now();
-        if (now - lastScrollTime.current < scrollDuration) return;
-
-        const sections = Array.from(
-          container.getElementsByClassName("section")
-        );
-        const newSection =
-          deltaY > 0
-            ? Math.min(currentSection + 1, sections.length - 1)
-            : Math.max(currentSection - 1, 0);
-
-        if (newSection !== currentSection) {
-          scrollToSection(newSection);
-          lastTouchY.current = touchY;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          router.replace(`#${id}`, undefined, { shallow: true });
         }
-      }
-    };
+      },
+      { threshold: 0.5 }
+    );
 
-    // Prevent default scrolling
-    document.body.style.overflow = "hidden";
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    container.addEventListener("touchstart", handleTouchStart, {
-      passive: true,
-    });
-    container.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     return () => {
-      document.body.style.overflow = "";
-      container.removeEventListener("wheel", handleWheel);
-      container.removeEventListener("touchstart", handleTouchStart);
-      container.removeEventListener("touchmove", handleTouchMove);
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
     };
-  }, [
-    currentSection,
-    isScrolling,
-    scrollDuration,
-    scrollThreshold,
-    scrollToSection,
-  ]);
-
-  // Wrap each child in a section div
-  const wrappedChildren = React.Children.map(children, (child) => (
-    <div className="section sm:h-screen w-full">{child}</div>
-  ));
+  }, [id, router]);
 
   return (
-    <div ref={containerRef} className="overflow-hidden">
-      <div
-        className="transition-transform duration-1000 ease-in-out"
-        style={{
-          transform: `translateY(-${currentSection * 100}vh)`,
-        }}
-      >
-        {wrappedChildren}
-      </div>
-    </div>
+    <section ref={sectionRef} id={id} className="h-screen snap-start">
+      {children}
+    </section>
   );
 };
 
-export default SmoothScrollSections;
+export default ScrollableSection;

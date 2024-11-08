@@ -2,12 +2,10 @@
 import { CommonSection } from "@/components/UI/CommonSection";
 import React, { useState } from "react";
 import AboutUsImage from "@/public/AboutUsDog.png";
-import SmoothScrollSections from "@/components/Layout/SmoothScrollSection/SmoothScroll";
 import { Icon } from "@/components/UI/Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import img1 from "@/public/group-of-five-people.webp";
 import img2 from "@/public/a-man-with-a-beard.webp";
-import Image from "next/image";
 import { ImageWithTextSection } from "@/components/UI/ImageWithTextSection";
 import { MeetTheTeam } from "./_components/MeetTheTeam";
 

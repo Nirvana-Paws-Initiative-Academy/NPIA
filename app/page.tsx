@@ -4,13 +4,9 @@ import Image from "next/image";
 import heroSectionImage from "@/public/NPIA_ Hero Section Icon.png";
 import Button from "@/components/UI/Button";
 import { CommonSection } from "@/components/UI/CommonSection";
-// import fact1 from "@/public/fact-1.webp";
 import fact1 from "@/public/Fourdogs.png";
 import { Icon } from "@/components/UI/Icons";
-import NPIAmd from "@/public/npia-md.png";
-import NPIAsm from "@/public/npia-sm.png";
 import secondSectionSmalImg from "@/public/small.png";
-import SmoothScrollSections from "@/components/Layout/SmoothScrollSection/SmoothScroll";
 
 const GOALS_DATA = [
   {

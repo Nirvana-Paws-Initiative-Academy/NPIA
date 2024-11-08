@@ -12,7 +12,7 @@ const ScrollableSection: React.FC<ScrollableSectionProps> = ({
 }) => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page on mount

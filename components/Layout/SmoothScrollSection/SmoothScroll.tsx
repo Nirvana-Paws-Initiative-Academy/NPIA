@@ -1,49 +1,62 @@
-import { useEffect, useRef, ReactNode } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useRef, ReactNode, useState } from "react";
+import dynamic from "next/dynamic";
 
 interface ScrollableSectionProps {
   children: ReactNode;
   id: string;
 }
 
-const ScrollableSection: React.FC<ScrollableSectionProps> = ({
-  children,
-  id,
-}) => {
+// Create a client-side only component
+const ScrollableSectionClient = ({ children, id }: ScrollableSectionProps) => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter();
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top of the page on mount
+    setMounted(true);
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          router.replace(`#${id}`, undefined, { shallow: true });
-        }
-      },
-      { threshold: 0.5 }
-    );
+    if (!mounted || !sectionRef.current) return;
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    const handleIntersection = async ([entry]: IntersectionObserverEntry[]) => {
+      if (entry.isIntersecting) {
+        // Get the window.history object directly
+        if (window.history) {
+          window.history.pushState({}, "", `#${id}`);
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+    });
+
+    observer.observe(sectionRef.current);
 
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, [id, router]);
+  }, [id, mounted]);
+
+  if (!mounted) return null;
 
   return (
-    <section ref={sectionRef} id={id} className="h-screen snap-start">
+    <section
+      ref={sectionRef}
+      id={id}
+      className="h-screen snap-start scroll-smooth"
+    >
       {children}
     </section>
   );
 };
+
+// Create a dynamic component with SSR disabled
+const ScrollableSection = dynamic(
+  () => Promise.resolve(ScrollableSectionClient),
+  { ssr: false }
+);
 
 export default ScrollableSection;

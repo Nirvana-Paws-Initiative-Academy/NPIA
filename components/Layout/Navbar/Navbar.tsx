@@ -24,14 +24,15 @@ const ROUTES = [
     name: "Our Programs",
     path: "/our-programs",
   },
-  {
-    id: "4",
-    name: "Contact Us",
-    path: "/contact-us",
-  },
+
   {
     id: "5",
     name: "Track Donation",
+    path: "/track-donation",
+  },
+  {
+    id: "4",
+    name: "Support & Connect",
     path: "/contact-us",
   },
 ];
@@ -56,17 +57,18 @@ const MOBILE_ROUTES = [
     icon: <Icon name="mobile_our_programs" />,
   },
   {
+    id: "5",
+    name: "Track Donation",
+    path: "/track-donation",
+    icon: <Icon name="mobile_track" />,
+  },
+  {
     id: "4",
-    name: "Contact Us",
+    name: "Support & Connect",
     path: "/contact-us",
     icon: <Icon name="mobile_contact" />,
   },
-  {
-    id: "5",
-    name: "Track Donation",
-    path: "/contact-us",
-    icon: <Icon name="mobile_track" />,
-  },
+
   {
     id: "6",
     name: "Terms",

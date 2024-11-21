@@ -80,7 +80,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="container px-4 m-auto fixed top-0 z-50 left-0 right-0 w-full">
+        <header className=" px-4  fixed top-0 z-50 left-0  w-screen h-16">
           <Navbar />
         </header>
 

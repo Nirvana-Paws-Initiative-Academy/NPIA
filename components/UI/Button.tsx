@@ -9,6 +9,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   key?: number | string;
   hover?: string;
+  className?: string;
 }
 
 const Button: React.FunctionComponent<ButtonProps> = ({
@@ -20,17 +21,18 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   children,
   key,
   hover,
+  className,
 }) => {
   return (
     <button
       className={cn(
         // base class for all buttons
         "flex items-center justify-center",
-
         // style based on sizes
         size === "small" && "px-1 py-1 rounded-md gap-1.5 shadow-sm text-md",
         size === "medium" && "px-6 py-2 rounded-lg gap-2 shadow-md text-lg",
-        size === "large" && "px-4 py-2 rounded-xl gap-2.5 text-xl",
+        size === "large" && "px-4 py-2 rounded-xl gap-2.5 text-xl ",
+        ` ${className}`,
 
         //style based on variant
         variant === "primary" &&

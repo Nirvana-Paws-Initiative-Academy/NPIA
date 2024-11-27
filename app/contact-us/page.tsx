@@ -6,7 +6,7 @@ import { Icon } from "@/components/UI/Icons";
 import { Input } from "@/components/UI/Input";
 import { SelectOptions } from "@/components/UI/SelectOptions";
 
-const page = () => {
+const ContactUs = () => {
   const [show, setShow] = React.useState(true);
   const [selectOptions, setSelectOptions] = React.useState([
     {
@@ -217,4 +217,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ContactUs;

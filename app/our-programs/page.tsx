@@ -88,7 +88,7 @@ const OurPrograms = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeWordIndex, setActiveWordIndex] = useState(-1);
   const [isLocked, setIsLocked] = useState(true);
-  const lastScrollY = useRef(0);
+  // const lastScrollY = useRef(0);
 
   useEffect(() => {
     if (activeWordIndex >= INSPIRE.length - 1) {

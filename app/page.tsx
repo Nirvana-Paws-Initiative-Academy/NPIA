@@ -7,7 +7,6 @@ import { CommonSection } from "@/components/UI/CommonSection";
 import fact1 from "@/public/Fourdogs.png";
 import { Icon } from "@/components/UI/Icons";
 import secondSectionSmalImg from "@/public/small.png";
-import ScrollableSection from "@/components/Layout/SmoothScrollSection/SmoothScroll";
 
 const GOALS_DATA = [
   {
@@ -96,7 +95,6 @@ export default function Home() {
   return (
     <>
       {/* <SmoothScrollSections> */}
-      <ScrollableSection id="home">
         <section className="min-h-screen flex flex-col items-center justify-center gap-8 ">
           <div className="hero-section_img">
             <Image
@@ -117,29 +115,32 @@ export default function Home() {
             </Button>
           </div>
         </section>
-      </ScrollableSection>
 
-      <ScrollableSection id="2">
         <CommonSection
           title="Only 1 in 5 Stray Puppies Make It"
           description="In the bustling streets of India, millions of stray puppies face a daily struggle for survival. Sadly, only a fraction of these vulnerable creatures reach adulthood. Disease, hunger, accidents, and cruelty claim far too many young lives. Nirvana Paws Initiative & Academy is dedicated to changing this reality."
           smallScreenDescription
+          smallDescription={<>
+            In the bustling streets of India, millions of stray puppies
+            face a daily struggle for survival. Sadly, only a fraction
+            of these vulnerable creatures reach adulthood. <br />
+            <span>
+              Disease, hunger, accidents, and cruelty claim far too many
+              young lives. Nirvana Paws Initiative & Academy is
+              dedicated to changing this reality.
+            </span>
+          </>}
           withImage
           largeSrc={fact1}
           smallSrc={secondSectionSmalImg}
         />
-      </ScrollableSection>
 
-      <ScrollableSection id="3">
         <CommonSection
           title="Nirvana Paws Initiative & Academy: Making A Difference"
           description="We rescue puppies from perilous situations, provide them with essential medical care and nutrition, and shower them with love and attention. Our specialized training programs equip them with the skills and confidence for successful adoption, or fulfilling roles as working dogs."
-          smallScreenDescription={false}
         />
-      </ScrollableSection>
 
-      <ScrollableSection id="4">
-        <section className="flex flex-col items-center justify-center w-full relative h-screen">
+        <section className="flex flex-col items-center justify-center w-full relative min-h-screen">
           <div className="goals-title">
             <h2 className="text-4xl text-[#4B714C]">Our Goals</h2>
           </div>
@@ -148,14 +149,14 @@ export default function Home() {
               {GOALS_DATA.map((goal) => (
                 <div
                   key={goal.id}
-                  className="flip-card w-[180px] h-[150px] sm:w-[220px] sm:h-[220px] m-2 sm:m-4"
+                  className="flip-card w-[150px]  h-[150px] sm:w-[220px] sm:h-[220px] m-2 sm:m-4"
                 >
                   <div className="flip-card-inner">
                     <div className="flip-card-front flex flex-col items-center justify-around p-4">
                       <div>
                         <Icon name={goal.name} />
                       </div>
-                      <p className="text-center font-medium text-xl sm:text-2xl text-[#4B714C]">
+                      <p className="text-center font-medium text-lg sm:text-2xl text-[#4B714C]">
                         {goal.name}
                       </p>
                     </div>
@@ -170,10 +171,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </ScrollableSection>
 
-      <ScrollableSection id="5">
-        <section className="flex flex-col items-center justify-center gap-4 w-full relative h-screen">
+        <section className="flex flex-col items-center justify-center gap-4 w-full relative min-h-screen">
           <div className="goals-title flex items-center flex-col">
             <h2 className="text-4xl text-[#4B714C]">Be A Lifeline</h2>
             <p className="text-[#8DB68E] text-2xl">
@@ -209,7 +208,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-      </ScrollableSection>
 
       {/* </SmoothScrollSections> */}
     </>

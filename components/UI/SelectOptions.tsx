@@ -62,7 +62,7 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
           {options.map((option) => (
             <div
               key={option.id}
-              className="flex items-center p-1 hover:bg-gray-50 bg-[#fafffd] cursor-pointer "
+              className="flex items-center p-1 hover:bg-gray-50 bg-[#fafffd] clickable "
               onClick={() => onChange(option.id)}
             >
               <div className="flex-shrink-0 h-12 w-12 bg-green-50 rounded-full flex items-center justify-center">

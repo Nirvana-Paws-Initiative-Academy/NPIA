@@ -76,7 +76,7 @@ const Page = () => {
       <CommonSection
         title="At Nirvana Paws Initiative & Academy"
         description="Our philosophy is rooted in a deep-seated belief that every animal deserves a chance to live a full and happy life."
-        smallScreenDescription
+        smallDescription={false}
         withImage
         largeSrc={AboutUsImage}
       />
@@ -174,7 +174,7 @@ const Page = () => {
         </div>
       </section>
 
-      <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-8">
+      <section className="flex flex-col items-center justify-evenly min-h-screen w-full m-auto ">
         <ImageWithTextSection
           title="Our Vision"
           description="To create a compassionate community where all puppies are
@@ -199,7 +199,7 @@ const Page = () => {
       <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-8">
         <div className="flex items-center justify-center flex-col gap-2">
           <h2 className="text-[#4B714C] text-4xl font-bold">Our Core Values</h2>
-          <p className="text-[#8DB68E] text-xl font-medium capitalize">
+          <p className="text-[#8DB68E] text-xl font-medium capitalize text-center">
             The core Principles that guide NPIA' s work
           </p>
         </div>

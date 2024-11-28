@@ -24,8 +24,8 @@ export const ImageWithTextSection: React.FC<ImageWithTextSection> = ({
     <>
       <div className={`flex justify-around items-center ${className}`} id={id}>
         <div className={"w-full sm:w-2/5 p-2  " + textClassName}>
-          <h2 className="text-[#4B714C] font-bold text-3xl">{title}</h2>
-          <p className="text-[#8DB68E] text-lg sm:text-xl capitalize ">
+          <h2 className="text-[#4B714C] font-bold text-4xl">{title}</h2>
+          <p className="text-[#8DB68E]  text-xl capitalize  ">
             {description}
           </p>
         </div>
@@ -33,7 +33,7 @@ export const ImageWithTextSection: React.FC<ImageWithTextSection> = ({
           <Image
             src={src}
             alt={alt}
-            className="w-[200px] sm:w-[300px] object-contain"
+            className="w-full sm:w-[350px] object-contain"
           />
         </div>
       </div>

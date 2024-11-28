@@ -36,13 +36,13 @@
         >
           <div className="common-section-info flex flex-col items-center justify-center sm:justify-around gap-[1vw] min-h-screen">
             <div className="flex items-center flex-col gap-7 sm:gap-[1vw] p-4">
-              <h1 className="text-[#4B714C] text-4xl tracking-tight font-bold text-center">
+              <h1 className="text-[#4B714C] text-5xl tracking-tight font-bold text-center">
                 {title}
               </h1>
 
               {/* Full description for small screens when smallScreenDescription is false */}
               <p
-                className={`w-full sm:w-4/5 text-[#4B714C] text-center text-lg sm:text-2xl font-[500] sm:block hidden`}
+                className={`w-full sm:w-4/5 text-[#4B714C] text-center text-lg sm:text-2xl font-[500] ${smallDescription ? "hidden" : "block"} `}
               >
                 {description}
               </p>

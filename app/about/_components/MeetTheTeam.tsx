@@ -49,16 +49,16 @@ export const MeetTheTeam = () => {
     <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-8 ">
       <div className="flex items-center justify-center flex-col gap-2">
         <h2 className="text-[#4B714C] text-4xl font-bold">Meet the Team</h2>
-        <p className="text-[#8DB68E] text-xl font-medium capitalize">
+        <p className="text-[#8DB68E] text-xl font-medium capitalize text-center">
           enhancing dog welfare with passion, expertise, and innovative care for
           happier, healthier lives.
         </p>
       </div>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+      <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {TEAM.map((member) => (
           <div
             key={member.id}
-            className="bg-[#E2FFE4] h-[50vh] w-[250px] flex items-center justify-center relative rounded-lg"
+            className="bg-[#E2FFE4] h-[35vh] sm:h-[50vh] w-[210px] sm:w-[250px] flex items-center justify-center relative rounded-lg"
           >
             <div className="bg-white absolute bottom-0 p-2 w-4/5 ml-2 mr-2 mb-2 flex items-center flex-col rounded-lg">
               <h3 className="text-[#4B714C] font-bold text-xl tracking-tight">

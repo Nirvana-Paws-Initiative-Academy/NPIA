@@ -95,119 +95,120 @@ export default function Home() {
   return (
     <>
       {/* <SmoothScrollSections> */}
-        <section className="min-h-screen flex flex-col items-center justify-center gap-8 ">
-          <div className="hero-section_img">
-            <Image
-              src={heroSectionImage}
-              alt="Hero section image for NPIA"
-              className="w-full sm:w-[30vw] h-auto object-contain"
-            />
-          </div>
-          <div className="flex flex-col items-center justify-center gap-2">
-            <h1 className="text-[#4B714C] text-4xl font-[400] text-center">
-              Rescuing & Empowering Stray Puppies
-            </h1>
-            <p className="text-[#4B714C] text-2xl font-[400] capitalize">
-              Help us get started
-            </p>
-            <Button variant="primary" size="large">
-              Donate Now
-            </Button>
-          </div>
-        </section>
+      <section className="min-h-screen flex flex-col items-center justify-center gap-8 ">
+        <div className="hero-section_img">
+          <Image
+            src={heroSectionImage}
+            alt="Hero section image for NPIA"
+            className="w-full sm:w-[30vw] h-auto object-contain"
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center gap-2">
+          <h1 className="text-[#4B714C] text-4xl font-[400] text-center">
+            Rescuing & Empowering Stray Puppies
+          </h1>
+          <p className="text-[#4B714C] text-2xl font-[400] capitalize">
+            Help us get started
+          </p>
+          <Button variant="primary" size="large">
+            Donate Now
+          </Button>
+        </div>
+      </section>
 
-        <CommonSection
-          title="Only 1 in 5 Stray Puppies Make It"
-          description="In the bustling streets of India, millions of stray puppies face a daily struggle for survival. Sadly, only a fraction of these vulnerable creatures reach adulthood. Disease, hunger, accidents, and cruelty claim far too many young lives. Nirvana Paws Initiative & Academy is dedicated to changing this reality."
-          smallScreenDescription
-          smallDescription={<>
-            In the bustling streets of India, millions of stray puppies
-            face a daily struggle for survival. Sadly, only a fraction
-            of these vulnerable creatures reach adulthood. <br />
-            <span>
-              Disease, hunger, accidents, and cruelty claim far too many
-              young lives. Nirvana Paws Initiative & Academy is
-              dedicated to changing this reality.
-            </span>
-          </>}
-          withImage
-          largeSrc={fact1}
-          smallSrc={secondSectionSmalImg}
-        />
+      <CommonSection
+        title="Only 1 in 5 Stray Puppies Make It"
+        description="In the bustling streets of India, millions of stray puppies face a daily struggle for survival. Sadly, only a fraction of these vulnerable creatures reach adulthood. Disease, hunger, accidents, and cruelty claim far too many young lives. Nirvana Paws Initiative & Academy is dedicated to changing this reality."
+        smallScreenDescription
+        smallDescription={<>
+          In the bustling streets of India, millions of stray puppies
+          face a daily struggle for survival. Sadly, only a fraction
+          of these vulnerable creatures reach adulthood. <br />
+          <span>
+            Disease, hunger, accidents, and cruelty claim far too many
+            young lives. Nirvana Paws Initiative & Academy is
+            dedicated to changing this reality.
+          </span>
+        </>}
+        withImage
+        largeSrc={fact1}
+        smallSrc={secondSectionSmalImg}
+      />
 
-        <CommonSection
-          title="Nirvana Paws Initiative & Academy: Making A Difference"
-          description="We rescue puppies from perilous situations, provide them with essential medical care and nutrition, and shower them with love and attention. Our specialized training programs equip them with the skills and confidence for successful adoption, or fulfilling roles as working dogs."
-        />
+      <CommonSection
+        title="Nirvana Paws Initiative & Academy: Making A Difference"
+        description="We rescue puppies from perilous situations, provide them with essential medical care and nutrition, and shower them with love and attention. Our specialized training programs equip them with the skills and confidence for successful adoption, or fulfilling roles as working dogs."
+        smallDescription={false}
+      />
 
-        <section className="flex flex-col items-center justify-center w-full relative min-h-screen">
-          <div className="goals-title">
-            <h2 className="text-4xl text-[#4B714C]">Our Goals</h2>
-          </div>
-          <div className="goals-cards-container">
-            <div className="goals-cards flex items-stretch flex-wrap justify-center w-full">
-              {GOALS_DATA.map((goal) => (
-                <div
-                  key={goal.id}
-                  className="flip-card w-[150px]  h-[150px] sm:w-[220px] sm:h-[220px] m-2 sm:m-4"
-                >
-                  <div className="flip-card-inner">
-                    <div className="flip-card-front flex flex-col items-center justify-around p-4">
-                      <div>
-                        <Icon name={goal.name} />
-                      </div>
-                      <p className="text-center font-medium text-lg sm:text-2xl text-[#4B714C]">
-                        {goal.name}
-                      </p>
-                    </div>
-                    <div className="hidden sm:flex flip-card-back p-4  items-center justify-center">
-                      <p className="text-lg text-[#4B714C] leading-tight text-center">
-                        {goal.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="flex flex-col items-center justify-center gap-4 w-full relative min-h-screen">
-          <div className="goals-title flex items-center flex-col">
-            <h2 className="text-4xl text-[#4B714C]">Be A Lifeline</h2>
-            <p className="text-[#8DB68E] text-2xl">
-              Support our mission by contributing your time, skills, or
-              resources to help pets thrive!
-            </p>
-          </div>
-          <div className="flex items-stretch flex-wrap justify-center gap-4 w-full">
-            {LIFELINE_DATA.map((goal) => (
+      <section className="flex flex-col items-center justify-center w-full relative min-h-screen">
+        <div className="goals-title">
+          <h2 className="text-4xl text-[#4B714C]">Our Goals</h2>
+        </div>
+        <div className="goals-cards-container">
+          <div className="goals-cards flex items-stretch flex-wrap justify-center w-full">
+            {GOALS_DATA.map((goal) => (
               <div
                 key={goal.id}
-                className="card bg-[#E2FFE4] w-[220px] h-[320px] sm:w-[280px] sm:h-[350px] flex flex-col items-start justify-center gap-2 p-2 relative transition-all duration-300  border-[#E2ffe4] border-2 hover:border-[#4b714c] rounded-lg hover:rounded-tr-[20%] hover:bg-[#fafffd] "
+                className="flip-card w-[150px]  h-[150px] sm:w-[220px] sm:h-[220px] m-2 sm:m-4"
               >
-                <div className="card_icon">
-                  <Icon name={goal.name} />
-                </div>
-
-                <div className="flex flex-col justify-start items-start mb-4 card-content">
-                  <h2 className="text-center font-medium text-3xl text-[#4B714C]">
-                    {goal.name}
-                  </h2>
-                  <p className="text-[#8DB68E] font-medium text-xl tracking-tight leading-snug">
-                    {goal.description}
-                  </p>
-                </div>
-
-                <div className="arrow-container ">
-                  <p className="arrow-icon transition-transform duration-300 clickable">
-                    <Icon name="right-arrow" />
-                  </p>
+                <div className="flip-card-inner">
+                  <div className="flip-card-front flex flex-col items-center justify-around p-4">
+                    <div>
+                      <Icon name={goal.name} />
+                    </div>
+                    <p className="text-center font-medium text-lg sm:text-2xl text-[#4B714C]">
+                      {goal.name}
+                    </p>
+                  </div>
+                  <div className="hidden sm:flex flip-card-back p-4  items-center justify-center">
+                    <p className="text-lg text-[#4B714C] leading-tight text-center">
+                      {goal.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
+
+      <section className="flex flex-col items-center justify-center gap-4 w-full relative min-h-screen">
+        <div className="goals-title flex items-center flex-col">
+          <h2 className="text-4xl text-[#4B714C]">Be A Lifeline</h2>
+          <p className="text-[#8DB68E] text-2xl">
+            Support our mission by contributing your time, skills, or
+            resources to help pets thrive!
+          </p>
+        </div>
+        <div className="flex items-stretch flex-wrap justify-center gap-4 w-full">
+          {LIFELINE_DATA.map((goal) => (
+            <div
+              key={goal.id}
+              className="card bg-[#E2FFE4] w-[220px] h-[320px] sm:w-[280px] sm:h-[350px] flex flex-col items-start justify-center gap-2 p-2 relative transition-all duration-300  border-[#E2ffe4] border-2 hover:border-[#4b714c] rounded-lg hover:rounded-tr-[20%] hover:bg-[#fafffd] "
+            >
+              <div className="card_icon">
+                <Icon name={goal.name} />
+              </div>
+
+              <div className="flex flex-col justify-start items-start mb-4 card-content">
+                <h2 className="text-center font-medium text-3xl text-[#4B714C]">
+                  {goal.name}
+                </h2>
+                <p className="text-[#8DB68E] font-medium text-xl tracking-tight leading-snug">
+                  {goal.description}
+                </p>
+              </div>
+
+              <div className="arrow-container ">
+                <p className="arrow-icon transition-transform duration-300 clickable">
+                  <Icon name="right-arrow" />
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* </SmoothScrollSections> */}
     </>

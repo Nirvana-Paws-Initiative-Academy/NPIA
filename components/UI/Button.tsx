@@ -10,6 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   key?: number | string;
   hover?: string;
   className?: string;
+  onClick?: () => void;
 }
 
 const Button: React.FunctionComponent<ButtonProps> = ({
@@ -22,6 +23,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   key,
   hover,
   className,
+  onClick
 }) => {
   return (
     <button
@@ -38,7 +40,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         variant === "primary" &&
           `bg-[#4B714C] ${hover} active:scale-90 text-[#FAFFFD] font-[400] transition duration-200 hover:bg-transparent border hover:border-green-950 hover:text-green-700 clickable`,
         variant === "secondary" &&
-          `bg-zinc-800 ${hover} active:scale-90 text-white tracking-tighter clickable`,
+          `bg-white text-slate-700 ${hover} active:scale-90  tracking-tighter clickable`,
 
         // style based on isStretched
         isStretched && "w-full"
@@ -46,6 +48,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
       aria-label={label}
       id={id}
       key={key}
+      onClick={onClick}
     >
       {children}
     </button>

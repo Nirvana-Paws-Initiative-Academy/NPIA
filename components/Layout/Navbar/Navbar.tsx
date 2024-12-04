@@ -28,7 +28,7 @@ const ROUTES = [
   {
     id: "5",
     name: "Track Donation",
-    path: "/track-donation",
+    path: "/contact-us",
   },
   {
     id: "4",
@@ -53,13 +53,13 @@ const MOBILE_ROUTES = [
   {
     id: "3",
     name: "Our Programs",
-    path: "/contact-us",
+    path: "/our-programs",
     icon: <Icon name="mobile_our_programs" />,
   },
   {
     id: "5",
     name: "Track Donation",
-    path: "/track-donation",
+    path: "/contact-us",
     icon: <Icon name="mobile_track" />,
   },
   {
@@ -98,7 +98,7 @@ export const Navbar = () => {
 
   const randomId = "445464";
   return (
-    <nav className="flex justify-between items-center  py-2 bg-[#fafffd]">
+    <nav className="flex justify-between items-center py-4 sm:py-2 bg-[#fafffd]">
       <div className="logo">
         <Image
           src={logoImg}
@@ -126,7 +126,7 @@ export const Navbar = () => {
           </li>
         ))}
         <li>
-          <Button size="large" variant="primary" id={randomId}>
+          <Button size="large" variant="primary" id={randomId} className="2xl:text-3xl">
             Donate Now
           </Button>
         </li>
@@ -134,7 +134,7 @@ export const Navbar = () => {
 
       {/* Mobile navbar */}
       {isMenuOpen && (
-        <ul className="sm:hidden items-start justify-start absolute left-0 top-10 bg-[#E2FFE4] h-screen p-[2vw] w-full gap-[4vw] flex flex-col  ">
+        <ul className="sm:hidden items-start justify-start absolute left-0 top-12 bg-[#E2FFE4] h-screen p-5 w-full gap-[4vw] flex flex-col  ">
           {MOBILE_ROUTES.map((route) => (
             <li key={route.id}>
               <MobileNavlink

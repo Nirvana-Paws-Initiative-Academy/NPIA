@@ -91,8 +91,8 @@ const ContactUs = () => {
   };
   
   return (
-    <section className="flex h-[100vh] gap-8 relative w-full mt-16">
-      <div className="w-[50%] h-full flex flex-col gap-4">
+    <section className="flex flex-col sm:flex-row h-auto sm:h-[100vh] relative w-full mt-16">
+      <div className="w-full sm:w-[50%] h-auto sm:h-full items-center justify-center sm:items-start sm:justify-start flex flex-col gap-4">
         <div>
           <h2 className="text-[#4B714C] font-bold text-4xl capitalize">
             Chat to our team
@@ -210,7 +210,7 @@ const ContactUs = () => {
           </form>
         </div>
       </div>
-      <div className="bg-[#E2FFE4] w-[50%] flex items-center justify-center rounded-xl">
+      <div className="hidden  bg-[#E2FFE4] w-[50%] sm:flex items-center justify-center rounded-xl">
         Hello world
       </div>
     </section>

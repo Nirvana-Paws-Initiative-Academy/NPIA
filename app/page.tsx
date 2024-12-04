@@ -7,6 +7,10 @@ import { CommonSection } from "@/components/UI/CommonSection";
 import fact1 from "@/public/Fourdogs.png";
 import { Icon } from "@/components/UI/Icons";
 import secondSectionSmalImg from "@/public/small.png";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { X } from "lucide-react";
+import { Input } from "@/components/UI/Input";
 
 const GOALS_DATA = [
   {
@@ -77,21 +81,36 @@ const LIFELINE_DATA = [
     name: "Donate",
     description:
       "Give today and help us provide loving care, shelter, and a second chance to Stray Puppies in need.",
+    action: "modal", // Action type for Donate
   },
   {
     id: 2,
     name: "Volunteer",
     description:
       "Volunteer with NPIA and help us create a better world for Stray Puppies in need.",
+    action: "navigate", // Action type for Volunteer
   },
   {
     id: 3,
     name: "Foster",
     description: "Give a temporary home, make a lasting impact. Foster today!",
+    action: "navigate", // Action type for Foster
   },
 ];
 
 export default function Home() {
+
+  const [showModal, setShowModal] = useState(false);
+
+
+  const handleAction = (action: string) => {
+    if (action === "modal") {
+      setShowModal(true);
+    } else if (action === "navigate") {
+      location.href = "/contact-us";
+    }
+  };
+
   return (
     <>
       {/* <SmoothScrollSections> */}
@@ -174,33 +193,30 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col items-center justify-center gap-4 w-full relative min-h-screen">
-        <div className="goals-title flex items-center flex-col">
+        <div className="goals-title flex items-center flex-col p-3">
           <h2 className="text-4xl text-[#4B714C]">Be A Lifeline</h2>
-          <p className="text-[#8DB68E] text-2xl">
-            Support our mission by contributing your time, skills, or
-            resources to help pets thrive!
+          <p className="text-[#8DB68E] text-2xl text-center">
+            Support our mission by contributing your time, skills, or resources to help pets thrive!
           </p>
         </div>
         <div className="flex items-stretch flex-wrap justify-center gap-4 w-full">
           {LIFELINE_DATA.map((goal) => (
             <div
               key={goal.id}
-              className="card bg-[#E2FFE4] w-[220px] h-[320px] sm:w-[280px] sm:h-[350px] flex flex-col items-start justify-center gap-2 p-2 relative transition-all duration-300  border-[#E2ffe4] border-2 hover:border-[#4b714c] rounded-lg hover:rounded-tr-[20%] hover:bg-[#fafffd] "
+              className="card bg-[#E2FFE4] w-[90%] h-[320px] sm:w-[280px] sm:h-[350px] flex flex-col items-center sm:items-start justify-center gap-2 p-2 relative transition-all duration-300  border-[#E2ffe4] border-2 hover:border-[#4b714c] rounded-lg sm:hover:rounded-tr-[20%] hover:bg-[#fafffd]"
             >
               <div className="card_icon">
                 <Icon name={goal.name} />
               </div>
 
-              <div className="flex flex-col justify-start items-start mb-4 card-content">
-                <h2 className="text-center font-medium text-3xl text-[#4B714C]">
-                  {goal.name}
-                </h2>
-                <p className="text-[#8DB68E] font-medium text-xl tracking-tight leading-snug">
+              <div className="flex flex-col justify-start items-center sm:items-start mb-4 card-content">
+                <h2 className="text-center font-medium text-3xl text-[#4B714C]">{goal.name}</h2>
+                <p className="text-[#8DB68E] font-medium text-xl tracking-tight leading-snug text-center sm:text-left w-9/12 sm:w-full">
                   {goal.description}
                 </p>
               </div>
 
-              <div className="arrow-container ">
+              <div className="arrow-container" onClick={() => handleAction(goal.action)}>
                 <p className="arrow-icon transition-transform duration-300 clickable">
                   <Icon name="right-arrow" />
                 </p>
@@ -208,6 +224,98 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* Modal for Donate */}
+        {showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-[#E2FFE4] w-[90%] sm:w-[50%]  p-6 rounded-lg shadow-lg relative">
+              <div className="flex items-center  justify-between mb-4">
+
+
+                <h2 className="text-3xl font-bold text-[#4B714C]">Donate Now</h2>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className=" text-gray-500 hover:text-gray-700"
+                  aria-label="Close Modal"
+                >
+                  <X />
+                </button>
+              </div>
+              <div>
+                <form className="flex flex-col gap-2 w-full">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex gap-4">
+                      <Input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        required
+                        icon="input_user"
+                        key="firstName"
+                        label="First name"
+                      />
+
+                      <Input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        required
+                        icon="input_user"
+                        key="lastName"
+                        label="Last name"
+                      />
+                    </div>
+                    <div className="flex gap-4">
+                      <Input
+                        type="text"
+                        id="emailId"
+                        name="emailId"
+                        required
+                        icon="input_user"
+                        key="emailId"
+                        label="Email Id"
+                      />
+
+                      <Input
+                        type="text"
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        required
+                        icon="input_user"
+                        key="phoneNumber"
+                        label="Phone number"
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="occupation"
+                        name="occupation"
+                        required
+                        icon="input_occupation"
+                        key="occupation"
+                        label="Occupation"
+                      />
+                    </div>
+
+                  </div>
+
+                </form>
+              </div>
+              <div className="mt-4">
+
+                <Button
+                  size="medium"
+                  variant="primary"
+                  onClick={() => setShowModal(false)}
+                >
+                  Make Donation
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </section>
 
       {/* </SmoothScrollSections> */}

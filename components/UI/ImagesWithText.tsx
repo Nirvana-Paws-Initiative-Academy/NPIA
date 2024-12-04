@@ -33,16 +33,14 @@ export const ImagesWithText: React.FC<ImagesWithTextProps> = ({
           // If it's an array, loop through and display each image
           image.map((jr, index) => (
             <React.Fragment key={index}>
-              <div className=" w-full sm:w-[200px] h-[300px] bg-[#E2FFE4] flex flex-col items-center justify-between">
+              <div className="w-[250px] sm:w-[200px] h-[300px] bg-[#E2FFE4] flex flex-col items-center justify-between">
                 <h2 className="text-[#4B714C] font-bold text-xl mt-10">
                   {jr.name}
                 </h2>
                 <Image
                   src={jr.src} // Valid for StaticImageData
                   alt={jr.id + jr.name}
-                  width={150} // Define width for the image
-                  height={300} // Define height for the image
-                  className="object-cover self-auto"
+                  className="w-[150px] h-auto object-cover self-auto"
                 />
               </div>
             </React.Fragment>

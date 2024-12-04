@@ -142,11 +142,11 @@ const OurPrograms = () => {
       <div className="flex flex-col items-center justify-center min-h-screen">
         <h2 className="text-4xl text-[#4B714C] mb-8">Our Programs</h2>
 
-        <div className="flex sm:flex-row flex-col justify-between gap-4 sm:gap-[5vw] border-b-2 border-[#4B714C]">
+        <div className="flex sm:flex-row flex-col justify-between gap-4 sm:gap-[5vw] sm:border-b-2 sm:border-[#4B714C]">
           {INSPIRE.map((s, index) => (
             <div key={s.id} className="relative">
               {/* The main INSPIRE letters - visible immediately */}
-              <p className="text-[#4B714C] uppercase font-extrabold text-9xl sm:text-[clamp(20rem,22vw,50rem)] relative tracking-tight leading-none">
+              <p className="text-[#4B714C] uppercase font-extrabold text-8xl sm:text-[clamp(20rem,22vw,50rem)] relative tracking-tight leading-none">
                 {s.str}
               </p>
 

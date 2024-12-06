@@ -99,9 +99,7 @@ const LIFELINE_DATA = [
 ];
 
 export default function Home() {
-
   const [showModal, setShowModal] = useState(false);
-
 
   const handleAction = (action: string) => {
     if (action === "modal") {
@@ -135,24 +133,53 @@ export default function Home() {
         </div>
       </section>
 
-      <CommonSection
-        title="Only 1 in 5 Stray Puppies Make It"
-        description="In the bustling streets of India, millions of stray puppies face a daily struggle for survival. Sadly, only a fraction of these vulnerable creatures reach adulthood. Disease, hunger, accidents, and cruelty claim far too many young lives. Nirvana Paws Initiative & Academy is dedicated to changing this reality."
-        smallScreenDescription
-        smallDescription={<>
-          In the bustling streets of India, millions of stray puppies
-          face a daily struggle for survival. Sadly, only a fraction
-          of these vulnerable creatures reach adulthood. <br />
-          <span>
-            Disease, hunger, accidents, and cruelty claim far too many
-            young lives. Nirvana Paws Initiative & Academy is
-            dedicated to changing this reality.
-          </span>
-        </>}
-        withImage
-        largeSrc={fact1}
-        smallSrc={secondSectionSmalImg}
-      />
+      <section className="flex flex-col items-center justify-center">
+        <div className="common-section-info flex flex-col items-center justify-center sm:justify-around gap-[1vw] min-h-screen">
+          <div className="flex items-center flex-col gap-7 sm:gap-[1vw] p-4">
+            <h1 className="text-[#4B714C] text-5xl tracking-tight font-bold text-center sm:text-[clamp(1rem,4vw,12rem)]">
+              Only 1 in 5 Stray Puppies Make It
+            </h1>
+
+            {/* Full description for small screens when smallScreenDescription is false */}
+            <p
+              className={`w-full sm:w-4/5 text-[#4B714C] text-center text-lg sm:text-[clamp(1.3rem,1.6vw,9rem)] leading-snug font-[500] hidden sm:block `}
+            >
+              In the bustling streets of India, millions of stray puppies face a
+              daily struggle for survival. Sadly, only a fraction of these
+              vulnerable creatures reach adulthood. Disease, hunger, accidents,
+              and cruelty claim far too many young lives. Nirvana Paws
+              Initiative & Academy is dedicated to changing this reality.
+            </p>
+
+            <p className="flex sm:hidden w-full sm:w-4/5 text-[#4B714C] text-center text-xl sm:text-2xl font-[500] flex-col gap-4">
+              <>
+                In the bustling streets of India, millions of stray puppies face
+                a daily struggle for survival. Sadly, only a fraction of these
+                vulnerable creatures reach adulthood. <br />
+                <span>
+                  Disease, hunger, accidents, and cruelty claim far too many
+                  young lives. Nirvana Paws Initiative & Academy is dedicated to
+                  changing this reality.
+                </span>
+              </>
+            </p>
+          </div>
+          <div className="common-section-img w-full">
+            <>
+              <Image
+                src={secondSectionSmalImg}
+                alt={"title"}
+                className="w-[80%] sm:hidden m-auto h-auto object-contain "
+              />
+              <Image
+                src={fact1}
+                alt={"title"}
+                className="hidden sm:block w-[60%] 4xl:w-[60vw] m-auto h-auto object-cover"
+              />
+            </>
+          </div>
+        </div>
+      </section>
 
       <CommonSection
         title="Nirvana Paws Initiative & Academy: Making A Difference"
@@ -162,7 +189,9 @@ export default function Home() {
 
       <section className="flex flex-col items-center justify-center w-full relative min-h-screen">
         <div className="goals-title mb-[2vh]">
-          <h2 className="text-4xl text-[#4B714C] sm:text-[clamp(.5rem,2vw,10rem)]">Our Goals</h2>
+          <h2 className="text-4xl text-[#4B714C] sm:text-[clamp(.5rem,2vw,10rem)]">
+            Our Goals
+          </h2>
         </div>
         <div className="goals-cards-container">
           <div className="goals-cards flex items-stretch flex-wrap justify-center w-full 4xl:w-[90vw] m-auto 4xl:gap-4">
@@ -194,9 +223,12 @@ export default function Home() {
 
       <section className="flex flex-col items-center justify-center gap-4 w-full relative min-h-screen">
         <div className="goals-title flex items-center flex-col p-3">
-          <h2 className="text-[#4B714C] sm:text-[clamp(1rem,2.5vw,10rem)] ">Be A Lifeline</h2>
+          <h2 className="text-[#4B714C] sm:text-[clamp(1rem,2.5vw,10rem)] ">
+            Be A Lifeline
+          </h2>
           <p className="text-[#8DB68E] text-center text-xl sm:text-[clamp(.5rem,2vw,8rem)] leading-tight">
-            Support our mission by contributing your time, skills, or resources to help pets thrive!
+            Support our mission by contributing your time, skills, or resources
+            to help pets thrive!
           </p>
         </div>
         <div className="flex items-stretch flex-wrap justify-center gap-[1.2vw] w-full">
@@ -210,13 +242,18 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col justify-start items-center sm:items-start gap-[1.2vw] mb-4 card-content">
-                <h2 className="text-center font-medium text-3xl sm:text-[clamp(.5rem,2vw,10rem)] text-[#4B714C]">{goal.name}</h2>
+                <h2 className="text-center font-medium text-3xl sm:text-[clamp(.5rem,2vw,10rem)] text-[#4B714C]">
+                  {goal.name}
+                </h2>
                 <p className="text-[#8DB68E] font-medium tracking-tight text-center sm:text-left w-9/12 sm:w-full text-xl sm:text-[clamp(.5rem,1.5vw,7rem)] leading-tight">
                   {goal.description}
                 </p>
               </div>
 
-              <div className="arrow-container" onClick={() => handleAction(goal.action)}>
+              <div
+                className="arrow-container"
+                onClick={() => handleAction(goal.action)}
+              >
                 <p className="arrow-icon transition-transform duration-300 clickable">
                   <Icon name="right-arrow" />
                 </p>
@@ -230,9 +267,9 @@ export default function Home() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-[#E2FFE4] w-[90%] sm:w-[50%]  p-6 rounded-lg shadow-lg relative">
               <div className="flex items-center  justify-between mb-4">
-
-
-                <h2 className="text-3xl font-bold text-[#4B714C]">Donate Now</h2>
+                <h2 className="text-3xl font-bold text-[#4B714C]">
+                  Donate Now
+                </h2>
                 <button
                   onClick={() => setShowModal(false)}
                   className=" text-gray-500 hover:text-gray-700"
@@ -297,13 +334,10 @@ export default function Home() {
                         label="Occupation"
                       />
                     </div>
-
                   </div>
-
                 </form>
               </div>
               <div className="mt-4">
-
                 <Button
                   size="medium"
                   variant="primary"
@@ -315,7 +349,6 @@ export default function Home() {
             </div>
           </div>
         )}
-
       </section>
 
       {/* </SmoothScrollSections> */}

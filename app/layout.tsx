@@ -89,22 +89,22 @@ export default function RootLayout({
         <main aria-label="Page Content" className="px-4 py-2 m-auto">
           {children}
         </main>
-        <footer className="flex sm:items-center flex-col border-b-[20px] border-[#4B714C] gap-4 mt-10 px-4 py-2 
+        <footer className="flex sm:items-center flex-col border-b-[1vw] border-[#4B714C] gap-[1.5vw] mt-[4vh] px-4 py-2 
         ">
 
-          <div className="bg-[#4B714C] w-full sm:w-8/12 p-6 rounded-2xl flex items-center flex-col-reverse sm:flex-row">
-            <div className="text-[#FAFFFD] flex flex-col gap-3 items-center sm:items-start ">
-              <h2 className="text-4xl ">INSPIRE: The Heart of Our Work</h2>
-              <p className="w-full sm:w-9/12 text-center sm:text-left text-lg leading-none">
+          <div className="bg-[#4B714C] w-full sm:w-8/12 p-[1.5vw] rounded-2xl flex items-center justify-between flex-col-reverse sm:flex-row">
+            <div className="text-[#FAFFFD] flex flex-col gap-4 sm:gap-[1vw] items-center sm:items-start ">
+              <h2 className="text-4xl sm:text-[clamp(1rem,2vw,10rem)]">INSPIRE: The Heart of Our Work</h2>
+              <p className="w-full sm:w-9/12 text-center sm:text-left text-lg leading-none sm:text-[clamp(.5rem,1.3vw,8rem)]">
                 INSPIRE (Initiative for Nurturing Stray Puppies Into Responsible Environments) is at the core of everything we do. It represents our unwavering commitment to providing stray puppies with the love, care, and opportunities they need to thrive.
               </p>
-              <Button size="medium" variant="secondary" className="2xl:text-3xl">
+              <Button size="medium" variant="secondary" className="sm:text-[clamp(.2rem,1.2vw,6rem)] clickable">
                 Join Us In Making A Difference
               </Button>
             </div>
 
             <div>
-              <Image src={footer} alt="" className="w-[300px] sm:w-[400px]" />
+              <Image src={footer} alt="" className="w-[300px] sm:w-[20vw]" />
             </div>
           </div>
 
@@ -112,16 +112,16 @@ export default function RootLayout({
             <Image
               src={footerImg}
               alt="Footer logo for NPIA"
-              className="w-[150px] sm:w-[100px] h-auto object-contain"
+              className="w-[150px] sm:w-[10vw] h-auto object-contain"
             />
           </div>
           <div className="hidden lg:flex footer_content items-center justify-center">
-            <p className="text-[#4B714C] text-xl sm:text-2xl text-center w-full sm:w-3/5 ">
+            <p className="text-[#4B714C] text-xl text-center w-full sm:w-3/5  sm:text-[clamp(.5rem,1.4vw,8rem)] leading-snug">
               Whether you donate, volunteer, or simply spread the word, your support is invaluable in our mission to create a brighter future for animals. Together, we can build a community where every animal is valued and protected.
             </p>
           </div>
           <div className="hidden lg:block footer_form m-auto">
-            <Button size="large" variant="primary" className="2xl:text-3xl clickable">
+            <Button size="large" variant="primary" className="sm:text-[clamp(.5rem,2vw,10rem)] clickable">
               Donate Now
             </Button>
           </div>
@@ -132,7 +132,7 @@ export default function RootLayout({
                 <li key={route.id}>
                   <Link
                     href={route.path}
-                    className="clickable text-[#4B714C] text-2xl font-bold"
+                    className="clickable text-[#4B714C] text-2xl font-bold sm:text-[clamp(.5rem,1.4vw,10rem)]"
                   >
                     {route.name}
                   </Link>
@@ -145,7 +145,7 @@ export default function RootLayout({
           </div>
 
           <div className="footer-copyright text-center">
-            <p className="text-[#4b714c] text-center">
+            <p className="text-[#4b714c] text-center sm:text-[clamp(.5rem,1.2vw,8rem)]">
               © 2024 Nirvana Paws Initative & Academy. All Rights Reserved.
             </p>
           </div>

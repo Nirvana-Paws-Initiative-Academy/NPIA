@@ -123,10 +123,10 @@ export default function Home() {
           />
         </div>
         <div className="flex flex-col items-center justify-center gap-2">
-          <h1 className="text-[#4B714C] text-4xl font-[400] text-center">
+          <h1 className="text-[#4B714C] text-4xl font-[400] text-center 2xl:text-5xl 3xl:text-6xl 4xl:text-7xl">
             Rescuing & Empowering Stray Puppies
           </h1>
-          <p className="text-[#4B714C] text-2xl font-[400] capitalize">
+          <p className="text-[#4B714C] text-2xl font-[400] capitalize text-center 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
             Help us get started
           </p>
           <Button variant="primary" size="large">
@@ -161,27 +161,27 @@ export default function Home() {
       />
 
       <section className="flex flex-col items-center justify-center w-full relative min-h-screen">
-        <div className="goals-title">
-          <h2 className="text-4xl text-[#4B714C]">Our Goals</h2>
+        <div className="goals-title mb-[2vh]">
+          <h2 className="text-4xl text-[#4B714C] sm:text-[clamp(.5rem,2vw,10rem)]">Our Goals</h2>
         </div>
         <div className="goals-cards-container">
-          <div className="goals-cards flex items-stretch flex-wrap justify-center w-full">
+          <div className="goals-cards flex items-stretch flex-wrap justify-center w-full 4xl:w-[90vw] m-auto 4xl:gap-4">
             {GOALS_DATA.map((goal) => (
               <div
                 key={goal.id}
-                className="flip-card w-[150px]  h-[150px] sm:w-[220px] sm:h-[220px] m-2 sm:m-4"
+                className="flip-card w-[150px]  h-[150px] sm:w-[15vw] sm:h-[30vh] m-2 sm:m-4"
               >
                 <div className="flip-card-inner">
                   <div className="flip-card-front flex flex-col items-center justify-around p-4">
                     <div>
                       <Icon name={goal.name} />
                     </div>
-                    <p className="text-center font-medium text-lg sm:text-2xl text-[#4B714C]">
+                    <p className="text-center font-medium text-lg sm:text-2xl text-[#4B714C] text-[clamp(1rem,1vw,2.5rem)] 4xl:text-[clamp(1.5rem,1.2vw,3.2rem)]">
                       {goal.name}
                     </p>
                   </div>
                   <div className="hidden sm:flex flip-card-back p-4  items-center justify-center">
-                    <p className="text-lg text-[#4B714C] leading-tight text-center">
+                    <p className=" text-[#4B714C] leading-tight text-center text-[clamp(1rem,1vw,2.5rem)] 4xl:text-[clamp(1.5rem,1vw,3rem)]">
                       {goal.description}
                     </p>
                   </div>
@@ -194,24 +194,24 @@ export default function Home() {
 
       <section className="flex flex-col items-center justify-center gap-4 w-full relative min-h-screen">
         <div className="goals-title flex items-center flex-col p-3">
-          <h2 className="text-4xl text-[#4B714C]">Be A Lifeline</h2>
-          <p className="text-[#8DB68E] text-2xl text-center">
+          <h2 className="text-[#4B714C] sm:text-[clamp(1rem,2.5vw,10rem)] ">Be A Lifeline</h2>
+          <p className="text-[#8DB68E] text-center text-xl sm:text-[clamp(.5rem,2vw,8rem)] leading-tight">
             Support our mission by contributing your time, skills, or resources to help pets thrive!
           </p>
         </div>
-        <div className="flex items-stretch flex-wrap justify-center gap-4 w-full">
+        <div className="flex items-stretch flex-wrap justify-center gap-[1.2vw] w-full">
           {LIFELINE_DATA.map((goal) => (
             <div
               key={goal.id}
-              className="card bg-[#E2FFE4] w-[90%] h-[320px] sm:w-[280px] sm:h-[350px] flex flex-col items-center sm:items-start justify-center gap-2 p-2 relative transition-all duration-300  border-[#E2ffe4] border-2 hover:border-[#4b714c] rounded-lg sm:hover:rounded-tr-[20%] hover:bg-[#fafffd]"
+              className="card bg-[#E2FFE4] w-[90%] h-[320px] sm:w-[20vw] sm:h-[50vh]  flex flex-col items-center sm:items-start justify-center gap-[2vw] p-[1.2vw] relative transition-all duration-300  border-[#E2ffe4] border-2 hover:border-[#4b714c] rounded-lg sm:hover:rounded-tr-[20%] hover:bg-[#fafffd]"
             >
-              <div className="card_icon">
+              <div className="flex items-start justify-start self-start">
                 <Icon name={goal.name} />
               </div>
 
-              <div className="flex flex-col justify-start items-center sm:items-start mb-4 card-content">
-                <h2 className="text-center font-medium text-3xl text-[#4B714C]">{goal.name}</h2>
-                <p className="text-[#8DB68E] font-medium text-xl tracking-tight leading-snug text-center sm:text-left w-9/12 sm:w-full">
+              <div className="flex flex-col justify-start items-center sm:items-start gap-[1.2vw] mb-4 card-content">
+                <h2 className="text-center font-medium text-3xl sm:text-[clamp(.5rem,2vw,10rem)] text-[#4B714C]">{goal.name}</h2>
+                <p className="text-[#8DB68E] font-medium tracking-tight text-center sm:text-left w-9/12 sm:w-full text-xl sm:text-[clamp(.5rem,1.5vw,7rem)] leading-tight">
                   {goal.description}
                 </p>
               </div>

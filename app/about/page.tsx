@@ -81,16 +81,16 @@ const Page = () => {
         largeSrc={AboutUsImage}
       />
 
-      <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto">
+      <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-[2vw]">
         <div className="flex flex-col sm:flex-row items-center justify-between w-9/12">
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-xl text-[#4B714C]">A Timeline of Compassion</p>
-            <h3 className="text-4xl font-[400] text-[#4B714C] tracking-tight">
+          <div className="flex flex-col items-start justify-start gap-[1vw]">
+            <p className="text-xl text-[#4B714C] sm:text-[clamp(.5rem,2vw,10rem)]">A Timeline of Compassion</p>
+            <h3 className="text-4xl font-[400] text-[#4B714C] tracking-tight sm:text-[clamp(1.3rem,1.8vw,8rem)]">
               Our Story
             </h3>
           </div>
           <div className="w-full sm:w-4/6">
-            <p className="text-[#4B714C] text-lg text-justify font-medium">
+            <p className="text-[#4B714C] text-lg text-justify font-medium sm:text-[clamp(.5rem,1.2vw,7rem)] leading-snug">
               The streets of India are home to countless stray animals, many of
               whom face a daily struggle for survival. These animals, often
               overlooked and undervalued, deserve a chance at a better life.
@@ -103,7 +103,7 @@ const Page = () => {
 
         <div className="flex mt-4 sm:mt-8 w-9/12 flex-col sm:flex-row">
           {/* Display the content based on selected option */}
-          <div className="w-full sm:w-7/12 h-[230px] sm:h-[350px] bg-[#E2FFE4] flex flex-col justify-center p-3 sm:p-6 rounded-xl overflow-hidden flex-shrink-0">
+          <div className="w-full sm:w-7/12 h-[180px] sm:h-auto bg-[#E2FFE4] flex flex-col justify-center p-3 sm:p-[1.5vw] rounded-[1vw] gap-[1.2vw] ">
             <span>
               <Icon
                 name={optionsData[selectedOption].title}
@@ -111,14 +111,14 @@ const Page = () => {
                 height="80"
               />
             </span>
-            <h2 className="text-[#4B714C] text-4xl font-normal truncate">
+            <h2 className="text-[#4B714C] text-3xl sm:text-[clamp(.5rem,2.5vw,12rem)]">
               {optionsData[selectedOption].title}
             </h2>
 
             <AnimatePresence mode="wait">
               <motion.p
                 key={selectedOption}
-                className="text-[#4B714C] text-md sm:text-2xl text-justify"
+                className="text-[#4B714C] text-md  text-justify sm:text-[clamp(.8rem,1.2vw,10rem)] leading-none font-medium"
                 initial={{ opacity: 0, y: 30, scale: 0.9 }}
                 animate={{
                   opacity: 1,
@@ -134,11 +134,11 @@ const Page = () => {
           </div>
 
           {/* Options List with Staggered Animations */}
-          <div className="flex flex-col w-full sm:w-2/5 h-[400px] overflow-y-auto rounded-lg">
+          <div className="flex flex-col w-full sm:w-2/5 h-auto overflow-y-auto rounded-xl">
             {Object.keys(optionsData).map((option, index) => (
               <motion.div
                 key={option}
-                className={`border-b-2 border-b-slate-100 text-[#4B714C] flex items-center justify-center p-3 cursor-pointer last:border-none clickable `}
+                className={`border-b-2 border-b-slate-100 text-[#4B714C] flex items-center justify-center p-[.8vw] cursor-pointer last:border-none clickable `}
                 onClick={() => setSelectedOption(option as OptionKey)}
                 initial={{
                   opacity: 0,
@@ -162,7 +162,7 @@ const Page = () => {
                   transition: { duration: 0.5 },
                 }}
               >
-                <h2 className="truncate text-xl flex items-center gap-6 active:scale-90 w-44">
+                <h2 className="truncate text-xl sm:text-[clamp(.5rem,1.4vw,8rem)] flex items-center gap-[1vw] active:scale-90 w-[30vw] sm:w-[10vw]">
                   <span className="text-sm">
                     <Icon name={option} width="35" height="35" />
                   </span>
@@ -196,10 +196,10 @@ const Page = () => {
         />
       </section>
 
-      <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-8">
-        <div className="flex items-center justify-center flex-col gap-2">
-          <h2 className="text-[#4B714C] text-4xl font-bold">Our Core Values</h2>
-          <p className="text-[#8DB68E] text-xl font-medium capitalize text-center">
+      <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-[2vh] sm:gap-[4vh]">
+        <div className="flex items-center justify-center flex-col gap-[1vh] sm:gap-[2vh] ">
+          <h2 className="text-[#4B714C]  font-bold text-2xl sm:text-[clamp(1rem,2.5vw,10rem)] sm:leading-none">Our Core Values</h2>
+          <p className="text-[#8DB68E] text-xl sm:text-[clamp(.5rem,2vw,8rem)] font-medium capitalize text-center">
             The core Principles that guide NPIA' s work
           </p>
         </div>
@@ -207,11 +207,11 @@ const Page = () => {
         <div className="flex flex-wrap items-stretch justify-center gap-8 w-full">
           {DATA.map((data) => (
             <div key={data.id} className="flex flex-col items-center gap-4">
-              <div className="icon bg-[#E2FFE4] p-4 rounded-3xl">
+              <div className="icon bg-[#E2FFE4] p-4 rounded-3xl w-[20vw] h-[10vh]  sm:w-[10vw] sm:h-[15vh] flex items-center justify-center">
                 <Icon name={data.name} />
               </div>
               <div>
-                <h3 className="text-[#4B714C] font-bold text-xl">
+                <h3 className="text-[#4B714C] font-bold text-xl sm:text-[clamp(1rem,1.2vw,10rem)]">
                   {data.name}
                 </h3>
               </div>

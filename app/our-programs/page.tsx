@@ -9,9 +9,10 @@ import Inspire from "@/public/Inspire.png";
 import Obedience from "@/public/Obidience.png";
 import Service from "@/public/Character.png";
 import Therapy from "@/public/Therapy Dog.png";
-
+import inspire from "@/public/inspire.png";
 import { ImagesWithText } from "@/components/UI/ImagesWithText";
 import { CommonSection } from "@/components/UI/CommonSection";
+import Image from "next/image";
 
 const INSPIRE = [
   { id: 1, str: "I", word: "INITIATIVE", cn: "top-[55%] -ml-[.7vw]" },
@@ -140,11 +141,11 @@ const OurPrograms = () => {
       className="flex flex-col items-center min-h-screen w-full overflow-hidden"
     >
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <h2 className="text-4xl text-[#4B714C] mb-8">Our Programs</h2>
+        <h2 className="text-4xl text-[#4B714C]  sm:text-[clamp(2rem,2vw,8rem)]">Our Programs</h2>
 
-        <div className="flex sm:flex-row flex-col justify-between gap-4 sm:gap-[5vw] sm:border-b-2 sm:border-[#4B714C]">
+        <div className="flex sm:flex-row flex-col items-center justify-between gap-4 sm:gap-[5vw] sm:border-b-2 sm:border-[#4B714C]">
           {INSPIRE.map((s, index) => (
-            <div key={s.id} className="relative">
+            <div key={s.id} className="relative hidden sm:block">
               {/* The main INSPIRE letters - visible immediately */}
               <p className="text-[#4B714C] uppercase font-extrabold text-8xl sm:text-[clamp(20rem,22vw,50rem)] relative tracking-tight leading-none">
                 {s.str}
@@ -166,11 +167,14 @@ const OurPrograms = () => {
               </motion.p>
             </div>
           ))}
+          <div className="block sm:hidden">
+            <Image src={inspire} alt="inspire" className="w-[100px] h-auto object-contain" />
+          </div>
         </div>
 
         {/* DATA section */}
         <motion.div
-          className="flex items-stretch justify-between w-full mt-16"
+          className="flex items-stretch justify-between w-full mt-[2vh]"
           initial={{ opacity: 0, y: 50 }}
           animate={{
             opacity: activeWordIndex === INSPIRE.length - 1 ? 1 : 0,
@@ -180,11 +184,11 @@ const OurPrograms = () => {
         >
           {DATA.map((d) => (
             <div
-              className="hidden sm:flex flex-col items-start w-[240px]"
+              className="hidden sm:flex flex-col items-start w-[15vw] gap-[1vh]"
               key={d.id}
             >
-              <h3 className="text-[#4B714C] font-bold text-2xl">{d.title}</h3>
-              <p className="text-[#8DB68E]">{d.description}</p>
+              <h3 className="text-[#4B714C] font-bold text-2xl sm:text-[clamp(.5rem,1.4vw,8rem)]">{d.title}</h3>
+              <p className="text-[#8DB68E] sm:text-[clamp(.5rem,1.4vw,8rem)] leading-none">{d.description}</p>
             </div>
           ))}
         </motion.div>

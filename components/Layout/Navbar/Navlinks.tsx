@@ -15,7 +15,7 @@ const Navlinks: React.FunctionComponent<NavlinksProps> = ({
       href={path}
       id={id}
       passHref
-      className="text-[#8DB68E] text-lg sm:text-xl 2xl:text-2xl font-[600] capitalize hover:text-[#4B714C] duration-200 transition clickable"
+      className="text-[#8DB68E] text-lg sm:text-xl 2xl:text-2xl  3xl:text-3xl 4xl:text-5xl font-[600] capitalize hover:text-[#4B714C] duration-200 transition clickable"
     >
       {children}
     </Link>

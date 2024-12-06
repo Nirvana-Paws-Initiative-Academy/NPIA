@@ -46,25 +46,26 @@ const TEAM = [
 
 export const MeetTheTeam = () => {
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-8 ">
-      <div className="flex items-center justify-center flex-col gap-2">
-        <h2 className="text-[#4B714C] text-4xl font-bold">Meet the Team</h2>
-        <p className="text-[#8DB68E] text-xl font-medium capitalize text-center">
+    <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-[2vh] sm:gap-[4vh] ">
+      <div className="flex items-center justify-center flex-col gap-[1vh] sm:gap-[2vh] ">
+        <h2 className="text-[#4B714C] text-4xl font-bold sm:text-[clamp(1rem,2.5vw,10rem)] leading-none">Meet the Team</h2>
+        <p className="text-[#8DB68E] text-xl font-medium capitalize text-center sm:text-[clamp(.6rem,1.7vw,8rem)]">
           enhancing dog welfare with passion, expertise, and innovative care for
           happier, healthier lives.
         </p>
       </div>
-      <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+      <div className="grid gap-[1.4vw] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {TEAM.map((member) => (
           <div
+
             key={member.id}
-            className="bg-[#E2FFE4] h-[35vh] w-[210px] sm:w-[250px] sm:h-[35vh] flex items-center justify-center relative rounded-lg"
+            className="bg-[#E2FFE4] h-[35vh] w-[210px] sm:w-[18vw] sm:h-[45vh] flex items-center justify-center relative rounded-lg"
           >
-            <div className="bg-white absolute bottom-0 p-2 w-4/5 ml-2 mr-2 mb-2 flex items-center flex-col rounded-lg">
-              <h3 className="text-[#4B714C] font-bold text-xl tracking-tight">
+            <div className="bg-white absolute bottom-0 p-[.5vw] w-4/5 m-auto mb-[2vh] flex items-center flex-col rounded-lg">
+              <h3 className="text-[#4B714C] font-bold text-xl tracking-tight sm:text-[clamp(1rem,1.5vw,3rem)] leading-none">
                 {member.name}
               </h3>
-              <span className="text-[#4B714C] font-medium text-md">
+              <span className="text-[#4B714C] font-medium text-md sm:text-[clamp(1rem,1vw,2rem)] leading-none">
                 {member.role}
               </span>
             </div>

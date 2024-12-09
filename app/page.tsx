@@ -7,8 +7,7 @@ import { CommonSection } from "@/components/UI/CommonSection";
 import fact1 from "@/public/Fourdogs.png";
 import { Icon } from "@/components/UI/Icons";
 import secondSectionSmalImg from "@/public/small.png";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 import { Input } from "@/components/UI/Input";
 

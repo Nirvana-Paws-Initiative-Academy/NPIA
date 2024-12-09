@@ -23,7 +23,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   key,
   hover,
   className,
-  onClick
+  onClick,
 }) => {
   return (
     <button
@@ -31,16 +31,19 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         // base class for all buttons
         "flex items-center justify-center",
         // style based on sizes
-        size === "small" && "px-[.3vw] py-[.3vw] rounded-md gap-1.5 shadow-sm text-md",
-        size === "medium" && "px-[.8vw] py-[.6vw] rounded-lg gap-2 shadow-md text-lg",
-        size === "large" && "px-[1vw] py-[.8vw] rounded-xl gap-2.5 text-xl 2xl:text-2xl  3xl:text-3xl 4xl:text-5xl",
+        size === "small" &&
+          "px-[.3vw] py-[.3vw] rounded-md gap-1.5 shadow-sm text-md",
+        size === "medium" &&
+          "px-[.8vw] py-[.6vw] rounded-lg gap-2 shadow-md text-lg",
+        size === "large" &&
+          "px-[1vw] py-[.8vw] rounded-xl gap-2.5 text-xl sm:text-[clamp(.4rem,1.6vw,7rem)]",
         ` ${className}`,
 
         //style based on variant
         variant === "primary" &&
-        `bg-[#4B714C] ${hover} active:scale-90 text-[#FAFFFD] font-[400] transition duration-200 hover:bg-transparent border hover:border-green-950 hover:text-green-700 clickable`,
+          `bg-[#4B714C] ${hover} active:scale-90 text-[#FAFFFD] font-[400] transition duration-200 hover:bg-transparent border hover:border-green-950 hover:text-green-700 clickable`,
         variant === "secondary" &&
-        `bg-white text-slate-700 ${hover} active:scale-90  tracking-tighter clickable`,
+          `bg-white text-slate-700 ${hover} active:scale-90  tracking-tighter clickable`,
 
         // style based on isStretched
         isStretched && "w-full"

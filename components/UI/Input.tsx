@@ -21,16 +21,16 @@ export const Input: React.FC<InputProps> = ({
     <>
       <div className="relative w-full">
         <input
-          type={type }
+          type={type}
           id={id || ""}
           placeholder={""}
-          className="peer w-full border border-[#8DB68E] p-2 pl-12 rounded-lg bg-[#fdfffd] focus:border-[#4B714C] focus:outline-none transition-colors duration-300 ease-in-out  font-medium text-md "
+          className="peer w-full border border-[#8DB68E] p-[.8vw] pl-[3vw] rounded-[.4vw] bg-[#fdfffd] focus:border-[#4B714C] focus:outline-none transition-colors duration-300 ease-in-out  font-medium text-md sm:text-[clamp(.4rem,1.2vw,3rem)]"
           required={required}
           name={name}
         />
         <label
           htmlFor={id || ""}
-          className="absolute left-12 transition-all duration-300 transform  font-medium text-[#8DB68E] peer-placeholder-shown:top-2 peer-placeholder-shown:text-md peer-placeholder-shown:text-[#8DB68E] peer-focus:-top-0 peer-focus:text-sm peer-focus:text-[#4B714C] peer-placeholder-shown: "
+          className="absolute left-[3vw]  transition-all duration-300 transform  font-medium text-[#8DB68E] peer-placeholder-shown:top-[1.5vh] 4xl:peer-placeholder-shown:top-[.5vh] peer-placeholder-shown:sm:text-[clamp(.7rem,1.3vw,6rem)] peer-placeholder-shown:text-[#8DB68E] peer-focus:-top-0 peer-focus:text-[clamp(.7rem,1.3vw,4rem)] peer-focus:text-[#4B714C] text-[clamp(.7rem,1.3vw,4rem)]"
         >
           {label}
         </label>

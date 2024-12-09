@@ -126,7 +126,12 @@ export const Navbar = () => {
           </li>
         ))}
         <li>
-          <Button size="large" variant="primary" id={randomId} className="2xl:text-3xl">
+          <Button
+            size="large"
+            variant="primary"
+            id={randomId}
+            className="text-[clamp(.5rem,1.4vw,3rem)]"
+          >
             Donate Now
           </Button>
         </li>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import emailjs from "@emailjs/browser";
 import Button from "@/components/UI/Button";
@@ -52,9 +52,9 @@ const ContactUs = () => {
   };
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-  
+
     const form = event.target as HTMLFormElement;
-  
+
     // Collecting form data
     const formData = {
       first_name: form["firstName"].value,
@@ -68,16 +68,14 @@ const ContactUs = () => {
         .join(", "),
       message: form["message"].value,
     };
-  
+
     // Sending email using EmailJS
     emailjs
       .send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Replace with your EmailJS Service ID
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Replace with your EmailJS Template ID
         formData,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!// Replace with your EmailJS Public Key
-
-       
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! // Replace with your EmailJS Public Key
       )
       .then(
         () => {
@@ -89,24 +87,31 @@ const ContactUs = () => {
         }
       );
   };
-  
+
   return (
-    <section className="flex flex-col sm:flex-row h-auto sm:h-[100vh] relative w-full mt-16">
-      <div className="w-full sm:w-[50%] h-auto sm:h-full items-center justify-center sm:items-start sm:justify-start flex flex-col gap-4">
-        <div>
-          <h2 className="text-[#4B714C] font-bold text-4xl capitalize">
+    <section className="flex flex-col sm:flex-row h-auto sm:h-full relative w-full mt-[8vh]">
+      <div className="w-full sm:w-[50%]  h-auto sm:h-full items-center justify-center sm:items-start sm:justify-start flex flex-col gap-[2vh] p-[1vw]">
+        <div
+          className="
+        flex flex-col gap-[1vh]
+        "
+        >
+          <h2 className="text-[#4B714C] font-bold text-4xl capitalize sm:text-[clamp(1rem,3vw,10rem)]">
             Chat to our team
           </h2>
-          <p className="text-[#4B714C] text-xl w-full sm:w-9/12 leading-none">
+          <p className="text-[#4B714C] text-xl w-full sm:w-[40vw] leading-none sm:text-[clamp(1rem,1.7vw,8rem)]">
             Connect with us and learn more about how you can make a difference
             in the lives of stray puppies.
           </p>
         </div>
 
-        <div>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full">
-            <div className="flex flex-col gap-4">
-              <div className="flex gap-4">
+        <div className="w-full ">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-[1.2vh] w-full"
+          >
+            <div className="flex flex-col gap-[2vh] w-full">
+              <div className="flex gap-[2vh] w-full">
                 <Input
                   type="text"
                   id="firstName"
@@ -163,8 +168,8 @@ const ContactUs = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <h2 className="text-[#4B714C] font-bold text-2xl">
+            <div className="flex flex-col gap-2 items-start justify-start">
+              <h2 className="text-[#4B714C] font-bold text-2xl sm:text-[clamp(.8rem,1.6vw,4rem)]">
                 Please Select the Following reason
               </h2>
               <div>
@@ -177,11 +182,11 @@ const ContactUs = () => {
 
               {show && (
                 <>
-                  <div className="relative">
+                  <div className="relative w-full">
                     <textarea
                       name="message"
                       id="message"
-                      className="relative w-full border border-[#DAF6DA] p-2 pl-12 rounded-lg bg-[#fdfffd] focus:border-[#4B714C] focus:outline-none transition-colors duration-300 ease-in-out font-medium text-md"
+                      className="relative w-full border border-[#DAF6DA] p-2 pl-12 rounded-lg bg-[#fdfffd] focus:border-[#4B714C] focus:outline-none transition-colors duration-300 ease-in-out font-medium text-md sm:text-[clamp(.4rem,1.2vw,3rem)]"
                       rows={3}
                       cols={20}
                     ></textarea>
@@ -189,7 +194,7 @@ const ContactUs = () => {
                       <span className="bg-[#DAF6DA] p-1 rounded-lg">
                         <Icon name="input_user" />
                       </span>
-                      <span className="text-[#4B714C] text-md font-bold">
+                      <span className="text-[#4B714C] text-md font-bold sm:text-[clamp(.4rem,1.2vw,3rem)]">
                         Queries
                       </span>
                     </p>
@@ -199,7 +204,7 @@ const ContactUs = () => {
                       variant="primary"
                       size="large"
                       label="Submit"
-                      className="w-[300px]"
+                      className="w-[30vw] "
                     >
                       Get In Touch
                     </Button>
@@ -210,9 +215,7 @@ const ContactUs = () => {
           </form>
         </div>
       </div>
-      <div className="hidden  bg-[#E2FFE4] w-[50%] sm:flex items-center justify-center rounded-xl">
-        Hello world
-      </div>
+      <div className="hidden  bg-[#E2FFE4] w-[50%] sm:flex items-center justify-center rounded-xl"></div>
     </section>
   );
 };

@@ -27,21 +27,21 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
     setShow((prev) => !prev);
   };
   return (
-    <div className="w-full max-w-2xl mx-auto border border-[#DAF6DA] rounded-lg ">
+    <div className="w-full  mx-auto border border-[#DAF6DA] rounded-lg ">
       {/* Header/Trigger */}
       <div
-        className="p-2 flex items-center justify-between cursor-pointer hover:bg-gray-50 clickable"
+        className="p-[1vw] flex items-center justify-between cursor-pointer hover:bg-gray-50 clickable"
         onClick={handleOptionChange}
       >
-        <div className="flex items-center gap-1 ">
+        <div className="flex items-center gap-[1vw] w-full">
           <div className="h-12 w-12 bg-[#DAF6DA] rounded-lg flex items-center justify-center">
             <Icon name="contact_header_icon" />
           </div>
-          <div className="">
-            <h2 className="text-md font-medium text-[#4B714C] ">
+          <div className="flex flex-col gap-[.5vw]">
+            <h2 className="text-md font-medium text-[#4B714C] leading-none sm:text-[clamp(.6rem,1.6vw,3rem)]">
               Please Select The Following Options
             </h2>
-            <p className="text-sm text-[#8DB68E]">
+            <p className="text-sm text-[#8DB68E] sm:text-[clamp(.4rem,1.2vw,8rem)] leading-none">
               Connect With Us And Learn More About How You Can Make A Difference
               In The Lives Of Stray Puppies.
             </p>
@@ -62,7 +62,7 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
           {options.map((option) => (
             <div
               key={option.id}
-              className="flex items-center p-1 hover:bg-gray-50 bg-[#fafffd] clickable "
+              className="flex items-center p-[.5vw] hover:bg-gray-50 bg-[#fafffd] clickable "
               onClick={() => onChange(option.id)}
             >
               <div className="flex-shrink-0 h-12 w-12 bg-green-50 rounded-full flex items-center justify-center">
@@ -70,10 +70,12 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
               </div>
 
               <div className="ml-4 flex-1">
-                <h3 className="text-md  font-bold text-[#4B714C]">
+                <h3 className="text-md  font-bold text-[#4B714C] sm:text-[clamp(.4rem,1.2vw,8rem)]">
                   {option.title}
                 </h3>
-                <p className="text-sm text-[#8DB68E]">{option.description}</p>
+                <p className="text-sm text-[#8DB68E] sm:text-[clamp(.4rem,1.2vw,8rem)]">
+                  {option.description}
+                </p>
               </div>
 
               <div className="ml-4 flex-shrink-0">

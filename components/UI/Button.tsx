@@ -41,7 +41,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
 
         //style based on variant
         variant === "primary" &&
-          `bg-[#4B714C] ${hover} active:scale-90 text-[#FAFFFD] font-[400] transition duration-200 hover:bg-transparent border hover:border-green-950 hover:text-green-700 clickable`,
+          `bg-[#4B714C] ${hover} active:scale-90 text-[#FAFFFD] font-[400] transition duration-200 hover:bg-transparent hover:border hover:border-green-950 hover:text-green-700 clickable`,
         variant === "secondary" &&
           `bg-white text-slate-700 ${hover} active:scale-90  tracking-tighter clickable`,
 

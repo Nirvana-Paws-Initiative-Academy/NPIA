@@ -48,7 +48,9 @@ export const MeetTheTeam = () => {
   return (
     <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-[2vh] sm:gap-[4vh] ">
       <div className="flex items-center justify-center flex-col gap-[1vh] sm:gap-[2vh] ">
-        <h2 className="text-[#4B714C] text-4xl font-bold sm:text-[clamp(1rem,2.5vw,10rem)] leading-none">Meet the Team</h2>
+        <h2 className="text-[#4B714C] text-4xl font-bold sm:text-[clamp(1rem,2.5vw,10rem)] leading-none">
+          Meet the Team
+        </h2>
         <p className="text-[#8DB68E] text-xl font-medium capitalize text-center sm:text-[clamp(.6rem,1.7vw,8rem)]">
           enhancing dog welfare with passion, expertise, and innovative care for
           happier, healthier lives.
@@ -57,7 +59,6 @@ export const MeetTheTeam = () => {
       <div className="grid gap-[1.4vw] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {TEAM.map((member) => (
           <div
-
             key={member.id}
             className="bg-[#E2FFE4] h-[35vh] w-[210px] sm:w-[18vw] sm:h-[45vh] flex items-center justify-center relative rounded-lg"
           >

@@ -26,7 +26,9 @@ export const ImagesWithText: React.FC<ImagesWithTextProps> = ({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-[2vh]">
-      <h2 className="text-4xl text-[#4B714C]  sm:text-[clamp(1rem,2vw,10rem)]">{title}</h2>
+      <h2 className="text-4xl text-[#4B714C]  sm:text-[clamp(1rem,2vw,10rem)]">
+        {title}
+      </h2>
 
       <div className="flex flex-wrap items-stretch justify-center gap-4">
         {isArray ? (
@@ -34,7 +36,7 @@ export const ImagesWithText: React.FC<ImagesWithTextProps> = ({
           image.map((jr, index) => (
             <React.Fragment key={index}>
               <div className="w-[250px] sm:w-[16vw] h-[50vh] bg-[#E2FFE4] flex flex-col items-center justify-between ">
-                <h2 className="text-[#4B714C] font-bold text-xl mt-[4vh] sm:text-[clamp(.5rem,1.4vw,8rem)]">
+                <h2 className="text-[#4B714C] font-bold text-xl mt-[4vh] sm:text-[clamp(.5rem,1.4vw,8rem)] text-center">
                   {jr.name}
                 </h2>
                 <Image

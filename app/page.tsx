@@ -236,7 +236,7 @@ export default function Home() {
               key={goal.id}
               className="card bg-[#E2FFE4] w-[90%] h-[320px] sm:w-[20vw] sm:h-[50vh]  flex flex-col items-center sm:items-start justify-center gap-[2vw] p-[1.2vw] relative transition-all duration-300  border-[#E2ffe4] border-2 hover:border-[#4b714c] rounded-lg sm:hover:rounded-tr-[20%] hover:bg-[#fafffd]"
             >
-              <div className="flex items-start justify-start self-start">
+              <div className="flex items-center justify-center sm:items-start sm:justify-start sm:self-start">
                 <Icon name={goal.name} />
               </div>
 

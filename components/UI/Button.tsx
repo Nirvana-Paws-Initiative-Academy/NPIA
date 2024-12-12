@@ -31,10 +31,9 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         // base class for all buttons
         "flex items-center justify-center",
         // style based on sizes
-        size === "small" &&
-          "px-[.3vw] py-[.3vw] rounded-md gap-1.5 shadow-sm text-md",
+        size === "small" && "px-[.3vw] py-[.3vw] rounded-md gap-1.5  text-md",
         size === "medium" &&
-          "px-[.8vw] py-[.6vw] rounded-lg gap-2 shadow-md text-lg",
+          "px-[1.6vw] sm:px-[1vw] py-[.6vw] rounded-lg gap-2  text-lg",
         size === "large" &&
           "px-[1vw] py-[.8vw] rounded-xl gap-2.5 text-xl sm:text-[clamp(.4rem,1.6vw,7rem)]",
         ` ${className}`,

@@ -84,8 +84,10 @@ const Page = () => {
       <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-[2vw]">
         <div className="flex flex-col sm:flex-row items-center justify-between w-9/12">
           <div className="flex flex-col items-start justify-start gap-[1vw]">
-            <p className="text-xl text-[#4B714C] sm:text-[clamp(.5rem,2vw,10rem)]">A Timeline of Compassion</p>
-            <h3 className="text-4xl font-[400] text-[#4B714C] tracking-tight sm:text-[clamp(1.3rem,1.8vw,8rem)]">
+            <p className="text-xl text-[#4B714C] sm:text-[clamp(.5rem,2vw,10rem)]">
+              A Timeline of Compassion
+            </p>
+            <h3 className="text-4xl font-[400] text-[#4B714C] tracking-tight sm:text-[clamp(1.3rem,1.8vw,8rem)]text-center sm:text-left">
               Our Story
             </h3>
           </div>
@@ -198,7 +200,9 @@ const Page = () => {
 
       <section className="flex flex-col items-center justify-center min-h-screen w-full m-auto gap-[2vh] sm:gap-[4vh]">
         <div className="flex items-center justify-center flex-col gap-[1vh] sm:gap-[2vh] ">
-          <h2 className="text-[#4B714C]  font-bold text-2xl sm:text-[clamp(1rem,2.5vw,10rem)] sm:leading-none">Our Core Values</h2>
+          <h2 className="text-[#4B714C]  font-bold text-2xl sm:text-[clamp(1rem,2.5vw,10rem)] sm:leading-none">
+            Our Core Values
+          </h2>
           <p className="text-[#8DB68E] text-xl sm:text-[clamp(.5rem,2vw,8rem)] font-medium capitalize text-center">
             The core Principles that guide NPIA' s work
           </p>

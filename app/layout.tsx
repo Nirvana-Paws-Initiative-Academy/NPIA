@@ -6,7 +6,7 @@ import footerImg from "@/public/NPIA_name.png";
 import Image from "next/image";
 import Button from "@/components/UI/Button";
 import Link from "next/link";
-import footer from "@/public/footer.png"
+import footer from "@/public/footer.png";
 import { Accordion } from "@/components/UI/Accordion";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -73,7 +73,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <head>
@@ -89,16 +88,26 @@ export default function RootLayout({
         <main aria-label="Page Content" className="px-4 py-2 m-auto">
           {children}
         </main>
-        <footer className="flex sm:items-center flex-col border-b-[1vw] border-[#4B714C] gap-[1.5vw] mt-[4vh] px-4 py-2 
-        ">
-
+        <footer
+          className="flex sm:items-center flex-col border-b-[1vw] border-[#4B714C] gap-[1.5vw] mt-[4vh] px-4 py-2 
+        "
+        >
           <div className="bg-[#4B714C] w-full sm:w-8/12 p-[1.5vw] rounded-2xl flex items-center justify-between flex-col-reverse sm:flex-row">
             <div className="text-[#FAFFFD] flex flex-col gap-4 sm:gap-[1vw] items-center sm:items-start ">
-              <h2 className="text-4xl sm:text-[clamp(1rem,2vw,10rem)]">INSPIRE: The Heart of Our Work</h2>
+              <h2 className="text-4xl sm:text-[clamp(1rem,2vw,10rem)] text-center">
+                INSPIRE: The Heart of Our Work
+              </h2>
               <p className="w-full sm:w-9/12 text-center sm:text-left text-lg leading-none sm:text-[clamp(.5rem,1.3vw,8rem)]">
-                INSPIRE (Initiative for Nurturing Stray Puppies Into Responsible Environments) is at the core of everything we do. It represents our unwavering commitment to providing stray puppies with the love, care, and opportunities they need to thrive.
+                INSPIRE (Initiative for Nurturing Stray Puppies Into Responsible
+                Environments) is at the core of everything we do. It represents
+                our unwavering commitment to providing stray puppies with the
+                love, care, and opportunities they need to thrive.
               </p>
-              <Button size="medium" variant="secondary" className="sm:text-[clamp(.2rem,1.2vw,6rem)] clickable">
+              <Button
+                size="medium"
+                variant="secondary"
+                className="sm:text-[clamp(.2rem,1.2vw,6rem)] clickable"
+              >
                 Join Us In Making A Difference
               </Button>
             </div>
@@ -117,11 +126,18 @@ export default function RootLayout({
           </div>
           <div className="hidden lg:flex footer_content items-center justify-center">
             <p className="text-[#4B714C] text-xl text-center w-full sm:w-3/5  sm:text-[clamp(.5rem,1.4vw,8rem)] leading-snug">
-              Whether you donate, volunteer, or simply spread the word, your support is invaluable in our mission to create a brighter future for animals. Together, we can build a community where every animal is valued and protected.
+              Whether you donate, volunteer, or simply spread the word, your
+              support is invaluable in our mission to create a brighter future
+              for animals. Together, we can build a community where every animal
+              is valued and protected.
             </p>
           </div>
           <div className="hidden lg:block footer_form m-auto">
-            <Button size="large" variant="primary" className="sm:text-[clamp(.5rem,2vw,10rem)] clickable">
+            <Button
+              size="large"
+              variant="primary"
+              className="sm:text-[clamp(.5rem,2vw,10rem)] clickable"
+            >
               Donate Now
             </Button>
           </div>

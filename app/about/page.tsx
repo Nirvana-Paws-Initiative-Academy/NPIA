@@ -189,7 +189,7 @@ const Page = () => {
         />
 
         <ImageWithTextSection
-          title="Our Mision"
+          title="Our Mission"
           description="To rescue and empower stray puppies in through expert care and specialized training, preparing them for successful adoption, or working dogs."
           src={img2}
           alt="Group of 5 people with a dog"

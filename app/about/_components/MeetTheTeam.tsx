@@ -2,39 +2,39 @@ import React from "react";
 
 const TEAM = [
   {
-    id: 2,
-    name: "Koushik Gaja",
-    role: "President",
-  },
-  {
     id: 1,
     name: "Deekshitha Ale",
-    role: "Vice President",
+    role: "President",
   },
+  // {
+  //   id: 2,
+  //   name: "Koushik Gaja",
+  //   role: "Vice President",
+  // },
 
   {
     id: 3,
-    name: "Goverdhan Lakkadi",
-    role: "Secretary",
+    name: "Gayathri Nagulapati",
+    role: "General Secretary",
   },
   {
     id: 4,
-    name: "Nayani",
-    role: "Assistant Secretary",
+    name: "Nayani Ravulapalli",
+    role: "Joint Secretary",
   },
   {
     id: 5,
-    name: "Gayatri",
+    name: "Subhashini Kannan",
     role: "Treasurer",
   },
   {
     id: 6,
-    name: "Mohit Kuril",
+    name: "Afreen Shaik",
     role: "Board Members",
   },
   {
     id: 7,
-    name: "Name To Be Decided",
+    name: "Goverdhan Lakkadi",
     role: "Board Members",
   },
   {

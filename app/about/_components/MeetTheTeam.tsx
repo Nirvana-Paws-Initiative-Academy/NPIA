@@ -22,21 +22,21 @@ const TEAM = [
     name: "Nayani Ravulapalli",
     role: "Joint Secretary",
   },
-  {
-    id: 5,
-    name: "Subhashini Kannan",
-    role: "Treasurer",
-  },
-  {
-    id: 6,
-    name: "Afreen Shaik",
-    role: "Board Members",
-  },
-  {
-    id: 7,
-    name: "Goverdhan Lakkadi",
-    role: "Board Members",
-  },
+  // {
+  //   id: 5,
+  //   name: "Subhashini Kannan",
+  //   role: "Treasurer",
+  // },
+  // {
+  //   id: 6,
+  //   name: "Afreen Shaik",
+  //   role: "Board Members",
+  // },
+  // {
+  //   id: 7,
+  //   name: "Goverdhan Lakkadi",
+  //   role: "Board Members",
+  // },
   {
     id: 8,
     name: "Name To Be Decided",

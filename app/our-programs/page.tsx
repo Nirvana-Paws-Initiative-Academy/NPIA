@@ -5,7 +5,7 @@ import Abandoned from "@/public/abandoned.png";
 import Injured from "@/public/injured.png";
 import Unsafe from "@/public/unsafe.png";
 import Care from "@/public/care.png";
-import Inspire from "@/public/Inspire.png";
+import Inspire from "@/public/inspire-action.png";
 import Obedience from "@/public/Obidience.png";
 import Service from "@/public/Character.png";
 import Therapy from "@/public/Therapy Dog.png";

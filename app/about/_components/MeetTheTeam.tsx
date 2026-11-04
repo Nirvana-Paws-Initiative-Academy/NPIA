@@ -3,38 +3,38 @@ import React from "react";
 const TEAM = [
   {
     id: 1,
-    name: "Deekshitha Ale",
+    name: "Name To Be Decided",
     role: "President",
   },
   // {
   //   id: 2,
-  //   name: "Koushik Gaja",
+  //   name: "Name To Be Decided",
   //   role: "Vice President",
   // },
 
   {
     id: 3,
-    name: "Gayathri Nagulapati",
+    name: "Name To Be Decided",
     role: "General Secretary",
   },
   {
     id: 4,
-    name: "Nayani Ravulapalli",
+    name: "Name To Be Decided",
     role: "Joint Secretary",
   },
   // {
   //   id: 5,
-  //   name: "Subhashini Kannan",
+  //   name: "Name To Be Decided",
   //   role: "Treasurer",
   // },
   // {
   //   id: 6,
-  //   name: "Afreen Shaik",
+  //   name: "Name To Be Decided",
   //   role: "Board Members",
   // },
   // {
   //   id: 7,
-  //   name: "Goverdhan Lakkadi",
+  //   name: "Name To Be Decided",
   //   role: "Board Members",
   // },
   {

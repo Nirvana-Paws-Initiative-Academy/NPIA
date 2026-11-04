@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, Heart } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { Icon } from "./Icons";
 
 type Option = {

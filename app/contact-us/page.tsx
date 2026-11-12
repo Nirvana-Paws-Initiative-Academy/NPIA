@@ -1,223 +1,307 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
-import emailjs from "@emailjs/browser";
-import Button from "@/components/UI/Button";
-import { Icon } from "@/components/UI/Icons";
-import { Input } from "@/components/UI/Input";
-import { SelectOptions } from "@/components/UI/SelectOptions";
 
-const ContactUs = () => {
-  const [show, setShow] = React.useState(true);
-  const [selectOptions, setSelectOptions] = React.useState([
-    {
-      id: "1",
-      icon: "🐾",
-      title: "I'm Looking To Volunteer At N.P.I.A",
-      description:
-        "Connect With Us And Learn More About How You Can Make A Difference In The Lives Of Stray Puppies.",
-      selected: false,
-    },
-    {
-      id: "2",
-      icon: "🎓",
-      title: "I'm Looking To Be A Student Ambassador N.P.I.A",
-      description:
-        "Connect With Us And Learn More About How You Can Make A Difference In The Lives Of Stray Puppies.",
-      selected: false,
-    },
-    {
-      id: "3",
-      icon: "🏠",
-      title: "I'm Looking To Adopt A Stray Puppy From N.P.I.A",
-      description:
-        "Connect With Us And Learn More About How You Can Make A Difference In The Lives Of Stray Puppies.",
-      selected: false,
-    },
-    {
-      id: "4",
-      icon: "❤️",
-      title: "I'm Looking To Foster A Stray Puppy From N.P.I.A",
-      description:
-        "Connect With Us And Learn More About How You Can Make A Difference In The Lives Of Stray Puppies.",
-      selected: false,
-    },
-  ]);
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { Compass, Heart, Mail, PawPrint, ShieldCheck } from "lucide-react";
 
-  const handleOptionChange = (id: string) => {
-    setSelectOptions((options) =>
-      options.map((option) =>
-        option.id === id ? { ...option, selected: !option.selected } : option
-      )
+const BG_IMAGE_URL = "/partner-network/pine-forest-bg.jpg";
+
+const SERVICES = [
+  "Partner Organization",
+  "Veterinary / Clinic Partner",
+  "Allied Individual",
+  "Institutional Sponsorship",
+  "Volunteer at NPIA",
+  "Student Ambassador",
+  "Adopt a Street Puppy",
+  "Foster a Rescue",
+  "Sanctuary Donation",
+] as const;
+
+interface QuickRouteBtnProps {
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}
+
+const QuickRouteBtn: React.FC<QuickRouteBtnProps> = ({
+  href,
+  label,
+  children,
+}) => (
+  <Link
+    href={href}
+    aria-label={label}
+    title={label}
+    className="w-8 h-8 rounded-xl border border-[#E2FFE4]/25 bg-[#152916] text-[#B2DCB3] flex items-center justify-center hover:bg-[#245736] hover:text-[#FAFFFD] transition-colors"
+  >
+    {children}
+  </Link>
+);
+
+export default function ContactUsPage() {
+  const [selected, setSelected] = useState<string[]>([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const brief = params.get("brief");
+    const type = params.get("type");
+
+    if (brief) {
+      setMessage(brief);
+    }
+    if (type === "partner") {
+      setSelected((prev) =>
+        prev.includes("Partner Organization")
+          ? prev
+          : [...prev, "Partner Organization"]
+      );
+    } else if (type === "donate") {
+      setSelected((prev) =>
+        prev.includes("Sanctuary Donation")
+          ? prev
+          : [...prev, "Sanctuary Donation"]
+      );
+    }
+  }, []);
+
+  const toggleService = (tag: string) => {
+    setSelected((prev) =>
+      prev.includes(tag) ? prev.filter((item) => item !== tag) : [...prev, tag]
     );
   };
-  const handleSubmit = (event: React.FormEvent) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (sending) return;
 
-    const form = event.target as HTMLFormElement;
+    setSending(true);
+    setErrorMsg(null);
 
-    // Collecting form data
-    const formData = {
-      first_name: form["firstName"].value,
-      last_name: form["lastName"].value,
-      occupation: form["occupation"].value,
-      email_id: form["email"].value,
-      phone_number: form["number"].value,
-      reason: selectOptions
-        .filter((option) => option.selected)
-        .map((option) => option.title)
-        .join(", "),
-      message: form["message"].value,
-    };
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          topics: selected,
+        }),
+      });
 
-    // Sending email using EmailJS
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Replace with your EmailJS Service ID
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Replace with your EmailJS Template ID
-        formData,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! // Replace with your EmailJS Public Key
-      )
-      .then(
-        () => {
-          alert("Message sent successfully!");
-        },
-        (error) => {
-          console.error("Failed to send message:", error);
-          alert("Failed to send message. Please try again later.");
-        }
+      const payload = (await response.json()) as { ok?: boolean; error?: string };
+
+      if (!response.ok || !payload.ok) {
+        setErrorMsg(
+          payload.error ||
+            "Unable to deliver your message right now. You can also write directly to hello@npia.org.in."
+        );
+        return;
+      }
+
+      setSent(true);
+    } catch {
+      setErrorMsg(
+        "Network error while sending. You can reach us directly at hello@npia.org.in."
       );
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
-    <section className="flex flex-col sm:flex-row h-auto sm:h-full relative w-full mt-[8vh]">
-      <div className="w-full sm:w-[50%]  h-auto sm:h-full items-center justify-center sm:items-start sm:justify-start flex flex-col gap-[2vh] p-[1vw]">
+    <div
+      className="w-full min-h-[calc(100vh-76px)] bg-[#FAFFFD] p-3 sm:p-4 md:p-6"
+      style={{ fontFamily: "'Inter', sans-serif" }}
+    >
+      <div className="relative w-full min-h-[calc(100vh-116px)] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl flex flex-col justify-end">
+        {/* Background Image */}
+        <img
+          src={BG_IMAGE_URL}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div
-          className="
-        flex flex-col gap-[1vh]
-        "
-        >
-          <h2 className="text-[#4B714C] font-bold text-4xl capitalize sm:text-[clamp(1rem,3vw,10rem)]">
-            Chat to our team
-          </h2>
-          <p className="text-[#4B714C] text-xl w-full sm:w-[40vw] leading-none sm:text-[clamp(1rem,1.7vw,8rem)]">
-            Connect with us and learn more about how you can make a difference
-            in the lives of stray puppies.
-          </p>
-        </div>
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-tr from-[#071309]/90 via-[#0B1C0E]/55 to-[#102412]/35 pointer-events-none"
+        />
 
-        <div className="w-full ">
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-[1.2vh] w-full"
-          >
-            <div className="flex flex-col gap-[2vh] w-full">
-              <div className="flex gap-[2vh] w-full">
-                <Input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  required
-                  icon="input_user"
-                  key="firstName"
-                  label="First name"
-                />
+        {/* Content Layer */}
+        <div className="relative z-10 w-full p-5 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+          {/* Headline Left */}
+          <div className="max-w-xl shrink-0 space-y-3">
+            <span className="inline-block rounded-full border border-[#E2FFE4]/30 bg-[#0B1C0E]/70 px-3.5 py-1 text-xs font-medium uppercase tracking-widest text-[#B2DCB3] backdrop-blur-md">
+              NPIA. Contact &amp; Partner Desk
+            </span>
+            <h1 className="text-[#FAFFFD] text-3xl sm:text-4xl xl:text-5xl font-medium leading-tight drop-shadow-lg">
+              Together for every street animal
+              <br />
+              in care and{" "}
+              <span
+                className="text-[#E2FFE4]"
+                style={{
+                  fontFamily: "'Instrument Serif', serif",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                }}
+              >
+                sanctuary
+              </span>
+            </h1>
+            <p className="text-sm sm:text-base text-[#E2FFE4]/85 max-w-md leading-relaxed">
+              Partner as an organization, collaborate as a vet, volunteer, foster,
+              adopt, or connect directly with our team through one desk.
+            </p>
+          </div>
 
-                <Input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  required
-                  icon="input_user"
-                  key="lastName"
-                  label="Last name"
-                />
-              </div>
-              <div>
-                <Input
-                  type="text"
-                  id="occupation"
-                  name="occupation"
-                  required
-                  icon="input_occupation"
-                  key="occupation"
-                  label="Occupation"
-                />
-              </div>
-              <div>
-                <Input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  icon="input_email"
-                  key="email"
-                  label="Email Id"
-                />
-              </div>
+          {/* Forest Glass Contact Form Card Right */}
+          <div className="w-full lg:w-[min(500px,48%)] shrink-0">
+            <div className="rounded-2xl sm:rounded-3xl border border-[#E2FFE4]/25 bg-[#0B1C0E]/90 backdrop-blur-2xl shadow-2xl p-5 sm:p-6 flex flex-col gap-4 text-[#FAFFFD]">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[#FAFFFD]">
+                    Say hello
+                  </h2>
+                  <a
+                    href="mailto:hello@npia.org.in"
+                    className="inline-flex items-center gap-1.5 text-xs text-[#B2DCB3] hover:text-[#FAFFFD] hover:underline mt-0.5"
+                  >
+                    <Mail size={12} aria-hidden="true" />
+                    <span>hello@npia.org.in</span>
+                  </a>
+                </div>
 
-              <div>
-                <Input
-                  type="number"
-                  id="number"
-                  name="number"
-                  required
-                  icon="input_phone"
-                  key="number"
-                  label="Primary phone number"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2 items-start justify-start">
-              <h2 className="text-[#4B714C] font-bold text-2xl sm:text-[clamp(.8rem,1.6vw,4rem)]">
-                Please Select the Following reason
-              </h2>
-              <div>
-                <SelectOptions
-                  options={selectOptions}
-                  onChange={handleOptionChange}
-                  setShow={setShow}
-                />
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <QuickRouteBtn href="/partner-network" label="Partner Network">
+                    <PawPrint size={14} aria-hidden="true" />
+                  </QuickRouteBtn>
+                  <QuickRouteBtn href="/donate" label="Donations">
+                    <Heart size={14} aria-hidden="true" />
+                  </QuickRouteBtn>
+                  <QuickRouteBtn href="/roadmap" label="4-Stage Roadmap">
+                    <Compass size={14} aria-hidden="true" />
+                  </QuickRouteBtn>
+                  <QuickRouteBtn href="/dpdp-policy" label="DPDP Act 2023">
+                    <ShieldCheck size={14} aria-hidden="true" />
+                  </QuickRouteBtn>
+                </div>
               </div>
 
-              {show && (
-                <>
-                  <div className="relative w-full">
-                    <textarea
-                      name="message"
-                      id="message"
-                      className="relative w-full border border-[#DAF6DA] p-2 pl-12 rounded-lg bg-[#fdfffd] focus:border-[#4B714C] focus:outline-none transition-colors duration-300 ease-in-out font-medium text-md sm:text-[clamp(.4rem,1.2vw,3rem)]"
-                      rows={3}
-                      cols={20}
-                    ></textarea>
-                    <p className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 flex flex-col items-center">
-                      <span className="bg-[#DAF6DA] p-1 rounded-lg">
-                        <Icon name="input_user" />
-                      </span>
-                      <span className="text-[#4B714C] text-md font-bold sm:text-[clamp(.4rem,1.2vw,3rem)]">
-                        Queries
-                      </span>
-                    </p>
+              <div className="h-px w-full bg-[#E2FFE4]/15" />
+
+              {sent ? (
+                <div className="flex flex-col items-center justify-center text-center py-8 gap-3">
+                  <div className="w-12 h-12 rounded-full bg-[#245736] border border-[#E2FFE4]/40 flex items-center justify-center text-xl text-[#E2FFE4] font-semibold">
+                    ✓
                   </div>
-                  <div className="flex items-center justify-center w-full">
-                    <Button
-                      variant="primary"
-                      size="large"
-                      label="Submit"
-                      className="w-[30vw] "
+                  <p className="text-base font-semibold text-[#FAFFFD]">
+                    You&rsquo;re all set!
+                  </p>
+                  <p className="text-sm text-[#B2DCB3]">
+                    Your message has been dispatched from hello@npia.org.in.
+                    Expect a reply within 24 hours.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSent(false);
+                      setMessage("");
+                    }}
+                    className="mt-1 text-xs font-medium text-[#E2FFE4] underline underline-offset-2 hover:text-white cursor-pointer"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+                  <div className="flex flex-col sm:flex-row gap-2.5">
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="Full name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="flex-1 min-w-0 text-sm px-3.5 py-2.5 rounded-xl border border-[#E2FFE4]/25 bg-[#152916]/80 text-[#FAFFFD] placeholder-[#B2DCB3]/60 focus:outline-none focus:ring-2 focus:ring-[#4AA552] focus:border-transparent transition"
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="flex-1 min-w-0 text-sm px-3.5 py-2.5 rounded-xl border border-[#E2FFE4]/25 bg-[#152916]/80 text-[#FAFFFD] placeholder-[#B2DCB3]/60 focus:outline-none focus:ring-2 focus:ring-[#4AA552] focus:border-transparent transition"
+                    />
+                  </div>
+
+                  <textarea
+                    name="message"
+                    rows={3}
+                    required
+                    placeholder="Share how you'd like to collaborate, partner, volunteer, adopt, or support NPIA..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="w-full text-sm px-3.5 py-2.5 rounded-xl border border-[#E2FFE4]/25 bg-[#152916]/80 text-[#FAFFFD] placeholder-[#B2DCB3]/60 focus:outline-none focus:ring-2 focus:ring-[#4AA552] focus:border-transparent transition resize-none"
+                  />
+
+                  <div className="space-y-2">
+                    <span className="block text-xs font-medium text-[#B2DCB3]">
+                      I need help with...
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {SERVICES.map((service) => {
+                        const active = selected.includes(service);
+                        return (
+                          <button
+                            key={service}
+                            type="button"
+                            aria-pressed={active}
+                            onClick={() => toggleService(service)}
+                            className={`text-xs font-medium px-2.5 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                              active
+                                ? "bg-[#E2FFE4] text-[#102412] border-[#E2FFE4] font-semibold"
+                                : "bg-[#152916]/75 text-[#E2FFE4]/90 border-[#E2FFE4]/20 hover:border-[#B2DCB3]/60"
+                            }`}
+                          >
+                            {service}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {errorMsg && (
+                    <p
+                      role="alert"
+                      className="rounded-xl border border-red-400/35 bg-red-950/60 px-3 py-2 text-xs text-red-200"
                     >
-                      Get In Touch
-                    </Button>
-                  </div>
-                </>
+                      {errorMsg}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="w-full bg-[#E2FFE4] hover:bg-[#FAFFFD] text-[#102412] text-sm font-semibold py-3 rounded-2xl transition-colors disabled:opacity-60 cursor-pointer"
+                  >
+                    {sending ? "Sending..." : "Send my message"}
+                  </button>
+                </form>
               )}
             </div>
-          </form>
+          </div>
         </div>
       </div>
-      <div className="hidden  bg-[#E2FFE4] w-[50%] sm:flex items-center justify-center rounded-xl"></div>
-    </section>
+    </div>
   );
-};
-
-export default ContactUs;
+}

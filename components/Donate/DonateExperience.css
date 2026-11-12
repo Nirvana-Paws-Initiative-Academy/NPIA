@@ -1,0 +1,89 @@
+.donate-shell {
+  --npia-deep: #0b1c0e;
+  --npia-surface: #102111;
+  --npia-card: #152916;
+  --npia-forest: #245736;
+  --npia-sage: #b2dcb3;
+  --npia-mint: #e2ffe4;
+  --npia-cream: #fafffd;
+  --radius: 1rem;
+
+  font-family: "Poppins", sans-serif;
+  background-color: var(--npia-deep);
+  color: var(--npia-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+.donate-shell h1,
+.donate-shell h2,
+.donate-shell h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.donate-shell h1 em,
+.donate-shell h2 em,
+.donate-shell .font-serif-accent {
+  font-family: "Source Serif 4", Georgia, serif;
+}
+
+/* NPIA botanical tint override for Liquid Glass panels while preserving ::before mask edge */
+.donate-shell .liquid-glass {
+  background: rgba(11, 28, 14, 0.42);
+  background-blend-mode: normal;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 1px rgba(226, 255, 228, 0.14);
+}
+
+.donate-shell .liquid-glass::before {
+  background: linear-gradient(
+    180deg,
+    rgba(226, 255, 228, 0.42) 0%,
+    rgba(178, 220, 179, 0.16) 22%,
+    transparent 44%,
+    transparent 60%,
+    rgba(178, 220, 179, 0.16) 80%,
+    rgba(226, 255, 228, 0.42) 100%
+  );
+}
+
+.donate-shell .liquid-glass-strong {
+  background: rgba(11, 28, 14, 0.54);
+  background-blend-mode: normal;
+  backdrop-filter: blur(36px);
+  -webkit-backdrop-filter: blur(36px);
+  box-shadow:
+    0 24px 56px -24px rgba(0, 0, 0, 0.65),
+    inset 0 1px 1px rgba(226, 255, 228, 0.18);
+}
+
+.donate-shell .liquid-glass-strong::before {
+  background: linear-gradient(
+    180deg,
+    rgba(226, 255, 228, 0.48) 0%,
+    rgba(178, 220, 179, 0.2) 22%,
+    transparent 42%,
+    transparent 60%,
+    rgba(178, 220, 179, 0.2) 80%,
+    rgba(226, 255, 228, 0.48) 100%
+  );
+}
+
+/* Sharp pointer notch beneath active amount card matching donation reference */
+.donate-notch {
+  position: relative;
+}
+
+.donate-notch::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #e2ffe4;
+}

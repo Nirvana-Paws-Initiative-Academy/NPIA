@@ -1,0 +1,99 @@
+.roadmap-page {
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
+  color: #152916;
+  background-color: #fafffd;
+}
+
+.roadmap-display {
+  font-family: var(--font-display);
+}
+
+/* Decorative top scroll progress indicator */
+.roadmap-progress-track {
+  position: fixed;
+  top: 4.25rem;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 40;
+  pointer-events: none;
+  background: rgba(178, 220, 179, 0.25);
+}
+
+.roadmap-progress-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #4b714c, #1f4d37);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    @keyframes roadmapGrowProgress {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .roadmap-progress-bar {
+      animation: roadmapGrowProgress auto linear;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@supports not (animation-timeline: scroll()) {
+  .roadmap-progress-track {
+    display: none;
+  }
+}
+
+/* Single-row stage jump navigation strip with horizontal scroll on small viewports */
+.roadmap-jump-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  overflow-x: auto;
+  scroll-snap-type: inline proximity;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none;
+}
+
+.roadmap-jump-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.roadmap-jump-pill {
+  flex: none;
+  scroll-snap-align: start;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Subtle active beacon without exceeding WCAG flash limits */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes stageBeacon {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(1.25);
+    }
+  }
+
+  .roadmap-active-dot {
+    animation: stageBeacon 2.6s ease-in-out infinite;
+  }
+}

@@ -1,0 +1,57 @@
+/* Initial banner floats centered at the bottom until the user makes a selection */
+.npia-consent-banner {
+  position: fixed;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 95;
+  width: min(700px, calc(100vw - 24px));
+  border-radius: 18px;
+  background: rgba(11, 28, 14, 0.96);
+  color: #fafffd;
+  border: 1px solid rgba(226, 255, 228, 0.24);
+  box-shadow: 0 20px 55px rgba(5, 14, 7, 0.45);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 1.05rem 1.2rem;
+  font-family: "Instrument Sans", system-ui, -apple-system, sans-serif;
+}
+
+.npia-consent-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(7, 19, 9, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-family: "Instrument Sans", system-ui, -apple-system, sans-serif;
+}
+
+.npia-consent-modal {
+  width: 100%;
+  max-width: 560px;
+  max-height: 90svh;
+  overflow-y: auto;
+  border-radius: 22px;
+  background: #fafffd;
+  color: #102412;
+  border: 1px solid rgba(16, 36, 18, 0.16);
+  box-shadow: 0 28px 70px rgba(7, 19, 9, 0.35);
+  padding: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .npia-consent-banner {
+    bottom: max(76px, calc(env(safe-area-inset-bottom) + 72px));
+    padding: 0.9rem 1rem;
+  }
+
+  .npia-consent-modal {
+    padding: 1.15rem;
+    border-radius: 18px;
+  }
+}

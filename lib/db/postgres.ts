@@ -202,11 +202,36 @@ export async function ensureDatabaseSchema(): Promise<void> {
         message TEXT NOT NULL,
         mail_status TEXT NOT NULL DEFAULT 'pending',
         mail_error TEXT,
+        relay_token TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
 
+      ALTER TABLE contact_submissions
+        ADD COLUMN IF NOT EXISTS relay_token TEXT;
+
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_contact_submissions_relay_token
+        ON contact_submissions (relay_token)
+        WHERE relay_token IS NOT NULL;
+
       CREATE INDEX IF NOT EXISTS idx_contact_submissions_created_at
         ON contact_submissions (created_at DESC);
+
+      CREATE TABLE IF NOT EXISTS contact_messages (
+        id BIGSERIAL PRIMARY KEY,
+        submission_id BIGINT NOT NULL REFERENCES contact_submissions(id) ON DELETE CASCADE,
+        direction TEXT NOT NULL CHECK (direction IN ('inbound_from_visitor', 'outbound_to_visitor', 'team_fanout')),
+        from_email TEXT NOT NULL,
+        from_name TEXT,
+        to_emails TEXT[] NOT NULL DEFAULT '{}',
+        subject TEXT NOT NULL,
+        text_body TEXT NOT NULL,
+        mail_status TEXT NOT NULL DEFAULT 'pending',
+        mail_error TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_contact_messages_submission_id
+        ON contact_messages (submission_id, created_at DESC);
 
       CREATE TABLE IF NOT EXISTS donation_pledges (
         id BIGSERIAL PRIMARY KEY,

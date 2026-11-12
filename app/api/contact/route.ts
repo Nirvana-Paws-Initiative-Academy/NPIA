@@ -5,6 +5,13 @@ import {
   getPool,
   renderTemplate,
 } from "@/lib/db/postgres";
+import {
+  EMAIL_REGEX,
+  buildRelayAddress,
+  generateRelayToken,
+  getMailConfig,
+  sendMailtrapEmail,
+} from "@/lib/mail/relay";
 
 interface ContactPayload {
   name?: unknown;
@@ -12,8 +19,6 @@ interface ContactPayload {
   message?: unknown;
   topics?: unknown;
 }
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function resolveRouteContext(topics: string[]): {
   category: string;
@@ -81,23 +86,24 @@ export async function POST(req: NextRequest) {
   const { category, templateKey } = resolveRouteContext(topics);
   const topicLine =
     topics.length > 0 ? topics.join(", ") : "General Contact / Partnership";
+  const relayToken = generateRelayToken();
 
   let submissionId: number | null = null;
   try {
     await ensureDatabaseSchema();
     const insertRes = await getPool().query<{ id: number }>(
-      `INSERT INTO contact_submissions (name, email, topics, category, message, mail_status)
-       VALUES ($1, $2, $3, $4, $5, 'pending')
+      `INSERT INTO contact_submissions (name, email, topics, category, message, mail_status, relay_token)
+       VALUES ($1, $2, $3, $4, $5, 'pending', $6)
        RETURNING id`,
-      [name, email, topics, category, message]
+      [name, email, topics, category, message, relayToken]
     );
     submissionId = insertRes.rows[0]?.id ?? null;
   } catch (dbErr) {
     console.error("Failed storing contact submission in PostgreSQL:", dbErr);
   }
 
-  const token = process.env.MAILTRAP_API_TOKEN;
-  if (!token) {
+  const config = getMailConfig();
+  if (!config.token) {
     if (submissionId !== null) {
       await getPool()
         .query(
@@ -125,70 +131,64 @@ export async function POST(req: NextRequest) {
   const textBody = renderTemplate(template.text_template, templateVars, false);
   const htmlBody = renderTemplate(template.html_template, templateVars, true);
 
-  const senderEmail = process.env.MAILTRAP_SENDER_EMAIL || "hello@npia.org.in";
-  const senderName =
-    process.env.MAILTRAP_SENDER_NAME || "Nirvana Paws Initiative & Academy";
-  const recipientEmail =
-    process.env.MAILTRAP_RECIPIENT_EMAIL || "gajakoushik@gmail.com";
-
-  try {
-    const mailtrapRes = await fetch("https://send.api.mailtrap.io/api/send", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: { email: senderEmail, name: senderName },
-        to: [{ email: recipientEmail }],
-        reply_to: { email, name },
-        subject,
-        text: textBody,
-        html: htmlBody,
-        category,
-      }),
-      signal: AbortSignal.timeout(10000),
-    });
-
-    if (!mailtrapRes.ok) {
-      const errorDetail = await mailtrapRes.text();
-      console.error("Mailtrap send error:", mailtrapRes.status, errorDetail);
-      if (submissionId !== null) {
-        await getPool()
-          .query(
-            `UPDATE contact_submissions SET mail_status = 'failed', mail_error = $1 WHERE id = $2`,
-            [`HTTP ${mailtrapRes.status}: ${errorDetail.slice(0, 400)}`, submissionId]
-          )
-          .catch(() => {});
+  const replyToAddress = config.relayDomain
+    ? {
+        email: buildRelayAddress(relayToken, config.relayDomain),
+        name: `${name} via NPIA Desk`,
       }
-      return NextResponse.json(
-        { error: "Unable to send email through Mailtrap right now." },
-        { status: 502 }
-      );
-    }
+    : { email, name };
 
-    if (submissionId !== null) {
-      await getPool()
-        .query(`UPDATE contact_submissions SET mail_status = 'sent' WHERE id = $1`, [
-          submissionId,
-        ])
-        .catch(() => {});
-    }
+  const sendResult = await sendMailtrapEmail({
+    token: config.token,
+    from: { email: config.senderEmail, name: config.senderName },
+    to: config.primaryRecipients.map((addr) => ({ email: addr })),
+    bcc: config.bccRecipients.map((addr) => ({ email: addr })),
+    replyTo: replyToAddress,
+    subject,
+    text: textBody,
+    html: htmlBody,
+    category,
+  });
 
-    return NextResponse.json({ ok: true, submissionId });
-  } catch (error) {
-    console.error("Mailtrap network error:", error);
+  if (!sendResult.ok) {
+    console.error("Mailtrap send error:", sendResult.error);
     if (submissionId !== null) {
       await getPool()
         .query(
           `UPDATE contact_submissions SET mail_status = 'failed', mail_error = $1 WHERE id = $2`,
-          ["Network error while sending", submissionId]
+          [sendResult.error.slice(0, 400), submissionId]
         )
         .catch(() => {});
     }
     return NextResponse.json(
-      { error: "Network error while delivering message." },
+      { error: "Unable to send email through Mailtrap right now." },
       { status: 502 }
     );
   }
+
+  if (submissionId !== null) {
+    await getPool()
+      .query(`UPDATE contact_submissions SET mail_status = 'sent' WHERE id = $1`, [
+        submissionId,
+      ])
+      .catch(() => {});
+
+    await getPool()
+      .query(
+        `INSERT INTO contact_messages (
+          submission_id, direction, from_email, from_name, to_emails, subject, text_body, mail_status
+        ) VALUES ($1, 'inbound_from_visitor', $2, $3, $4, $5, $6, 'sent')`,
+        [
+          submissionId,
+          email.toLowerCase(),
+          name,
+          config.allTeamRecipients,
+          subject,
+          message,
+        ]
+      )
+      .catch(() => {});
+  }
+
+  return NextResponse.json({ ok: true, submissionId });
 }

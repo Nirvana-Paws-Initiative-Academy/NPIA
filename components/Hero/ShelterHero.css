@@ -278,7 +278,7 @@
 }
 
 .hero h1 .hero-lead {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -292,14 +292,17 @@
 }
 
 .hero h1 .hero-charter-link {
+  display: inline-block;
   color: inherit;
-  text-decoration: underline;
-  text-underline-offset: calc(4 * var(--u));
-  text-decoration-color: color-mix(
-    in srgb,
-    rgba(36, 69, 38, 0.45) calc((1 - var(--k2)) * 100%),
-    rgba(178, 220, 179, 0.55)
-  );
+  line-height: 1.15;
+  text-decoration: none;
+  padding-bottom: calc(2 * var(--u));
+  border-bottom: 1px solid
+    color-mix(
+      in srgb,
+      rgba(36, 69, 38, 0.45) calc((1 - var(--k2)) * 100%),
+      rgba(178, 220, 179, 0.55)
+    );
   transition: opacity 0.18s ease;
 }
 

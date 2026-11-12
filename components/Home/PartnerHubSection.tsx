@@ -193,7 +193,7 @@ export default function PartnerHubSection() {
       className={`sec3-shell ${inView ? "sec3-visible" : ""}`}
     >
       {/* Left Framed Botanical Sanctuary Card */}
-      <div className="sec3-media-card">
+      <div className="sec3-media-card" data-aos="fade-up">
         <Image
           src="/Veterinarian_tending_to_dog_51eefdfd.jpg"
           alt="NPIA caretaker tending to a street dog at the sanctuary veranda"
@@ -282,7 +282,7 @@ export default function PartnerHubSection() {
       </div>
 
       {/* Right Column: Interactive Network Onboarding */}
-      <div className="sec3-form-column">
+      <div className="sec3-form-column" data-aos="fade-up" data-aos-delay="120">
         <div className="sec3-form-inner">
           {/* Typographic NPIA. wordmark */}
           <div

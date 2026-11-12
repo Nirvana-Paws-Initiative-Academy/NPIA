@@ -10,13 +10,19 @@
   width: 100%;
   min-height: 100svh;
   background-color: var(--sec4-bg);
+  background: linear-gradient(
+    to bottom,
+    #fdfefd 0%,
+    #fdfefd calc(100% - 88px),
+    #fafffd 100%
+  );
   color: var(--sec4-ink);
   font-family: "Lexend", -apple-system, BlinkMacSystemFont, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: calc(30 * var(--u)) calc(24 * var(--u)) calc(34 * var(--u));
+  padding: clamp(72px, 9vh, 118px) clamp(24px, 4vw, 48px) clamp(84px, 10vh, 130px);
   overflow-x: clip;
 }
 
@@ -463,7 +469,7 @@
   .sec4-shell {
     --u: clamp(0.95px, 100vw / 560, 1.45px);
     min-height: 0;
-    padding: 56px 24px 64px;
+    padding: 72px 24px 88px;
   }
 
   .sec4-inner {
@@ -573,7 +579,7 @@
 @media (max-width: 640px) {
   .sec4-shell {
     --u: min(100vw / 400, 1.4px);
-    padding: calc(36 * var(--u)) calc(18 * var(--u)) calc(44 * var(--u));
+    padding: calc(56 * var(--u)) calc(18 * var(--u)) calc(72 * var(--u));
   }
 
   .sec4-headline {
@@ -592,7 +598,7 @@
 
   .sec4-cards-grid {
     grid-template-columns: 1fr;
-    gap: calc(16 * var(--u));
+    gap: calc(22 * var(--u));
   }
 
   .sec4-card {

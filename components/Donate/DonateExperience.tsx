@@ -187,6 +187,11 @@ export default function DonateExperience() {
         aria-hidden="true"
         className="absolute inset-0 z-0 pointer-events-none bg-[linear-gradient(115deg,rgba(11,28,14,0.72)_0%,rgba(16,33,17,0.56)_52%,rgba(11,28,14,0.74)_100%)]"
       />
+      {/* Seamless bottom melt into dark-top footer */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 z-[1] bg-gradient-to-b from-transparent to-[#0B1C0E]"
+      />
 
       {/* TWO-PANEL SPLIT FOREGROUND */}
       <div className="relative z-10 w-full flex flex-col lg:flex-row">

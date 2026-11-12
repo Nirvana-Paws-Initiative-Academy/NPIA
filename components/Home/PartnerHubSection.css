@@ -15,11 +15,12 @@
   width: 100%;
   min-height: 100svh;
   background-color: var(--sec3-bg);
+  background: linear-gradient(to bottom, #e8f0e8 0%, #fdfefd 96px, #fdfefd 100%);
   color: var(--sec3-ink);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   display: grid;
   grid-template-columns: minmax(0, 1fr) max(calc(508.7 * var(--u)), 45%);
-  padding: calc(11.5 * var(--u)) 0 calc(15.7 * var(--u)) calc(15.6 * var(--u));
+  padding: clamp(56px, 7vh, 96px) clamp(18px, 2.5vw, 36px) clamp(72px, 8.5vh, 112px);
   overflow-x: clip;
 }
 
@@ -531,8 +532,8 @@
     --u: clamp(0.74px, 100vw / 960, 1.05px);
     min-height: 0;
     grid-template-columns: 1fr;
-    padding: 16px 18px 40px;
-    gap: 28px;
+    padding: 56px 24px 64px;
+    gap: 32px;
   }
 
   .sec3-media-card {
@@ -656,8 +657,8 @@
 @media (max-width: 639px) {
   .sec3-shell {
     --u: 0.56px;
-    padding: 12px 14px 32px;
-    gap: 20px;
+    padding: 44px 18px 56px;
+    gap: 28px;
   }
 
   .sec3-media-card {

@@ -258,8 +258,11 @@ export function SanctuaryRoadmap() {
       </section>
 
       {/* Bottom Partner & Charter Bridge */}
-      <section className="w-full pb-12 px-2 sm:px-6">
-        <div className="max-w-5xl mx-auto rounded-3xl p-6 sm:p-10 bg-[#ECF2EC] border border-[#B2DCB3] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <section className="w-full pt-6 pb-24 sm:pb-32 px-2 sm:px-6">
+        <div
+          className="max-w-5xl mx-auto rounded-3xl p-6 sm:p-10 bg-[#ECF2EC] border border-[#B2DCB3] flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+          data-aos="fade-up"
+        >
           <div className="max-w-xl">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1F4D37]">
               Partner With Stages 1 &amp; 2 Today

@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ChevronUp, Info, X } from "lucide-react";
+import { ArrowDown, ArrowRight, ChevronUp, Info } from "lucide-react";
 import { useVideoScrub } from "@/hooks/useVideoScrub";
 
 const VIDEO_SRC = "/hero/caring-for-street-dogs-scrub.mp4";
@@ -104,27 +104,12 @@ export default function StreetSanctuaryScroll() {
   } = useVideoScrub(VIDEO_SRC, handleProgressFrame);
 
   const [navReady, setNavReady] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [charterOpen, setCharterOpen] = useState(false);
 
   useEffect(() => {
     const id = setTimeout(() => setNavReady(true), 200);
     return () => clearTimeout(id);
   }, []);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [menuOpen]);
 
   useEffect(() => {
     if (!charterOpen) return;
@@ -212,27 +197,28 @@ export default function StreetSanctuaryScroll() {
             className="absolute top-0 left-0 right-0 z-40 pointer-events-auto px-6 sm:px-8 md:px-12 pt-8 sm:pt-12 pb-6 flex items-center justify-between transition-colors duration-500"
             style={{ color: navColor }}
           >
-            {/* Mobile Hamburger (<lg) */}
-            <button
-              type="button"
-              className="lg:hidden flex flex-col gap-[5px] py-2 cursor-pointer"
-              aria-label="Open section menu"
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen(true)}
-            >
-              <span
-                className="block w-[24px] h-[2px] transition-colors duration-500"
-                style={{ backgroundColor: navColor }}
-              />
-              <span
-                className="block w-[24px] h-[2px] transition-colors duration-500"
-                style={{ backgroundColor: navColor }}
-              />
-              <span
-                className="block w-[16px] h-[2px] transition-colors duration-500"
-                style={{ backgroundColor: navColor }}
-              />
-            </button>
+            {/* Mobile compact beat pills (<lg) — single hamburger stays in main hero nav */}
+            <div className="lg:hidden inline-flex items-center gap-1.5 rounded-full border border-[#E2FFE4]/25 bg-[#0B1C0E]/55 px-2 py-1 backdrop-blur-md">
+              {navItems.map((item, idx) => {
+                const isActive = stage.activeStep === item.stepIdx;
+                const shortNum = `0${idx + 1}`;
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => scrollToProgress(item.target)}
+                    aria-label={item.label}
+                    className={`rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.14em] transition-colors cursor-pointer ${
+                      isActive
+                        ? "bg-[#E2FFE4] text-[#102412]"
+                        : "text-[#FAFFFD]/75 hover:text-white"
+                    }`}
+                  >
+                    {shortNum}
+                  </button>
+                );
+              })}
+            </div>
 
             {/* Desktop lg+ left story beat chapters */}
             <div className="hidden lg:flex items-center gap-6 xl:gap-8">
@@ -567,87 +553,11 @@ export default function StreetSanctuaryScroll() {
         </div>
       </div>
 
-      {/* Full-Screen Mobile Menu Overlay */}
+      {/* Seamless misty transition into Partner Hub section */}
       <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="NPIA Section Menu"
-        className={`fixed inset-0 z-[100] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-          menuOpen
-            ? "opacity-100 visible"
-            : "opacity-0 invisible pointer-events-none"
-        }`}
-        style={{ backgroundColor: DARK }}
-      >
-        <div
-          className={`h-full flex flex-col justify-between transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-            menuOpen ? "translate-y-0" : "-translate-y-8"
-          }`}
-        >
-          <div className="flex justify-end px-6 sm:px-8 pt-8 sm:pt-12">
-            <button
-              type="button"
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close section menu"
-              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:border-white transition-colors cursor-pointer"
-            >
-              <X size={18} />
-            </button>
-          </div>
-
-          <div className="flex flex-col px-8 sm:px-12 my-auto">
-            {navItems.map((item, i) => {
-              const isActive = stage.activeStep === item.stepIdx;
-              return (
-                <button
-                  key={item.label}
-                  type="button"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    scrollToProgress(item.target);
-                  }}
-                  style={{
-                    opacity: menuOpen ? 1 : 0,
-                    transform: menuOpen ? "translateY(0)" : "translateY(20px)",
-                    transition:
-                      "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-                    transitionDelay: `${i * 60}ms`,
-                  }}
-                  className={`text-left py-3 text-2xl sm:text-3xl font-light tracking-wide uppercase transition-colors cursor-pointer ${
-                    isActive ? "text-white" : "text-white/60 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 px-8 sm:px-12 pb-20 sm:pb-10 text-xs tracking-[0.2em] uppercase text-white/60">
-            <Link
-              href="/about"
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-white transition-colors"
-            >
-              ABOUT NPIA
-            </Link>
-            <Link
-              href="/contact-us"
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-white transition-colors"
-            >
-              CONTACT
-            </Link>
-            <Link
-              href="/donate"
-              onClick={() => setMenuOpen(false)}
-              className="text-[#B2DCB3] hover:text-white transition-colors"
-            >
-              DONATE
-            </Link>
-          </div>
-        </div>
-      </div>
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 z-20 bg-gradient-to-b from-transparent via-[#0b1c0e]/55 to-[#e8f0e8]"
+      />
     </section>
   );
 }

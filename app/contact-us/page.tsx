@@ -119,7 +119,7 @@ export default function ContactUsPage() {
 
   return (
     <div
-      className="w-full min-h-[calc(100vh-76px)] bg-[#FAFFFD] p-3 sm:p-4 md:p-6"
+      className="w-full min-h-[calc(100vh-76px)] bg-[#FAFFFD] p-3 pb-16 sm:p-4 sm:pb-24 md:p-6 md:pb-28"
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       <div className="relative w-full min-h-[calc(100vh-116px)] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl flex flex-col justify-end">

@@ -983,7 +983,7 @@ export function AboutBaselineExperience() {
       <section
         id="team"
         aria-labelledby="about-values-title"
-        className="bg-[#FAFFFD] py-20 sm:py-24 px-5 sm:px-10"
+        className="bg-[#FAFFFD] pt-20 pb-28 sm:pt-24 sm:pb-36 px-5 sm:px-10"
       >
         <div className="max-w-6xl mx-auto">
           <div ref={valuesHeadRef}>
@@ -1022,7 +1022,10 @@ export function AboutBaselineExperience() {
               </Link>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+            <div
+              className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4"
+              data-aos="fade-up"
+            >
               {FOUNDING_SEATS.map((seat, idx) => (
                 <div
                   key={seat.name}

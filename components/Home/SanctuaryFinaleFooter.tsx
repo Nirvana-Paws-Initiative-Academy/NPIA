@@ -60,7 +60,7 @@ export default function SanctuaryFinaleFooter() {
 
       <div className="footer-inner">
         <div className="footer-grid">
-          <div className="brand">
+          <div className="brand" data-aos="fade-up">
             <Link href="/" className="brand-lockup" aria-label="NPIA Home">
               <span className="brand-wordmark" data-no-translate="true">
                 NPIA<span className="brand-wordmark-dot">.</span>
@@ -91,8 +91,14 @@ export default function SanctuaryFinaleFooter() {
             </ul>
           </div>
 
-          {COLUMNS.map((col) => (
-            <nav key={col.title} className="col" aria-label={col.ariaLabel}>
+          {COLUMNS.map((col, idx) => (
+            <nav
+              key={col.title}
+              className="col"
+              aria-label={col.ariaLabel}
+              data-aos="fade-up"
+              data-aos-delay={idx === 0 ? "100" : "150"}
+            >
               <h3 className="col-title">{col.title}</h3>
               <ul className="link-list">
                 {col.links.map((item) => (
@@ -104,7 +110,7 @@ export default function SanctuaryFinaleFooter() {
             </nav>
           ))}
 
-          <div className="footer-connect">
+          <div className="footer-connect" data-aos="fade-up" data-aos-delay="200">
             <h3 className="col-title">Connect With NPIA</h3>
             <p>
               Reach our team for organizational partnerships, veterinary
@@ -130,7 +136,7 @@ export default function SanctuaryFinaleFooter() {
           </div>
         </div>
 
-        <div className="footer-bottom">
+        <div className="footer-bottom" data-aos="fade-up" data-aos-delay="200">
           <div className="footer-copy-group">
             <p className="footer-copy">
               &copy; {new Date().getFullYear()} Nirvana Paws Initiative &amp;

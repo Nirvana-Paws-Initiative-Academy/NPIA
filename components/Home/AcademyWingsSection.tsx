@@ -267,7 +267,7 @@ export default function AcademyWingsSection() {
           ))}
         </div>
 
-        <div className="sec4-cta-wrap">
+        <div className="sec4-cta-wrap" data-aos="fade-up">
           <Link href="/our-programs" className="sec4-cta-btn">
             Explore Our Programs
           </Link>

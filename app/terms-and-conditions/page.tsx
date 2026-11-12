@@ -1,15 +1,27 @@
-import type { Metadata } from "next";
 import { LegalDocumentLayout } from "@/components/Legal/LegalDocumentLayout";
+import { JsonLd } from "@/components/SEO/JsonLd";
+import { buildPageMetadata, getLegalSchemaGraph } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+const DESCRIPTION =
+  "Terms and Conditions governing use of the Nirvana Paws Initiative & Academy (NPIA) digital platform, partner inquiries, and voluntary support pledges.";
+
+export const metadata = buildPageMetadata({
   title: "Terms & Conditions | NPIA",
-  description:
-    "Terms and Conditions governing use of the Nirvana Paws Initiative & Academy (NPIA) digital platform, partner inquiries, and voluntary support pledges.",
-};
+  description: DESCRIPTION,
+  path: "/terms-and-conditions",
+});
 
 export default function TermsAndConditionsPage() {
   return (
-    <LegalDocumentLayout
+    <>
+      <JsonLd
+        data={getLegalSchemaGraph({
+          path: "/terms-and-conditions",
+          title: "Terms & Conditions | NPIA",
+          description: DESCRIPTION,
+        })}
+      />
+      <LegalDocumentLayout
       badge="Legal Governance"
       title="Terms & Conditions"
       subtitle="Please review the rules governing access to the Nirvana Paws Initiative & Academy (NPIA) website, program information, partner outreach, and voluntary support inquiries."
@@ -69,5 +81,6 @@ export default function TermsAndConditionsPage() {
         },
       ]}
     />
+    </>
   );
 }

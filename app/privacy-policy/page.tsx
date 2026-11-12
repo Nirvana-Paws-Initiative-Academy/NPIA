@@ -1,15 +1,27 @@
-import type { Metadata } from "next";
 import { LegalDocumentLayout } from "@/components/Legal/LegalDocumentLayout";
+import { JsonLd } from "@/components/SEO/JsonLd";
+import { buildPageMetadata, getLegalSchemaGraph } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+const DESCRIPTION =
+  "How Nirvana Paws Initiative & Academy (NPIA) collects, processes, protects, and respects personal information and cookie preferences.";
+
+export const metadata = buildPageMetadata({
   title: "Privacy Policy | NPIA",
-  description:
-    "How Nirvana Paws Initiative & Academy (NPIA) collects, processes, protects, and respects personal information and cookie preferences.",
-};
+  description: DESCRIPTION,
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (
-    <LegalDocumentLayout
+    <>
+      <JsonLd
+        data={getLegalSchemaGraph({
+          path: "/privacy-policy",
+          title: "Privacy Policy | NPIA",
+          description: DESCRIPTION,
+        })}
+      />
+      <LegalDocumentLayout
       badge="Privacy & Transparency"
       title="Privacy Policy"
       subtitle="NPIA collects only minimal, purposeful information needed to respond to animal rescue partners, supporters, and community volunteers—never selling or renting your data."
@@ -64,5 +76,6 @@ export default function PrivacyPolicyPage() {
         },
       ]}
     />
+    </>
   );
 }

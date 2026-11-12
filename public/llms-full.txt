@@ -1,0 +1,84 @@
+# Nirvana Paws Initiative & Academy (NPIA) — Complete Reference
+
+Canonical URL: https://npia.org.in
+Contact Email: hello@npia.org.in
+Country: India
+Statutory Privacy Framework: Digital Personal Data Protection Act, 2023 (DPDP Act, India)
+
+---
+
+## Executive Summary
+
+Nirvana Paws Initiative & Academy (NPIA) unites existing animal rescue shelters, veterinary clinics, community feeders, volunteers, and fosters so injured and abandoned street animals receive urgent beds and medical care today—without waiting for bricks and mortar—while funding NPIA's permanent Flagship Sanctuary & Rehab Center and The Canine Academy.
+
+---
+
+## Seven Founding Charter Aims
+
+1. **Rescue**: Save stray animals from harm.
+2. **Care**: Provide food, safe shelter, and medical care.
+3. **Train**: Teach animals skills for confidence and a better life.
+4. **Place**: Match dogs into loving forever homes or service/therapy roles.
+5. **Educate**: Teach compassionate, responsible animal care in schools and communities.
+6. **Advocate**: Stand up against animal cruelty and promote humane welfare laws.
+7. **Collaborate**: Build a shared logistics network supporting allied animal welfare groups and rescues.
+
+---
+
+## Four-Stage Impact Roadmap (https://npia.org.in/roadmap)
+
+### Stage 01 · Active Foundation — The Connected Shelter & Workforce Grid
+- Onboards 10+ local shelters and rescue groups into a shared recovery-bed and quarantine capacity grid.
+- Maintains a centralized digital bed, vaccination, and medical log registry across partner shelters.
+- Pools volunteers, animal handlers, and rescue transport vans.
+- Runs a unified city-wide adoption hub with 30-day family transition support.
+
+### Stage 02 · Medical & Field Expansion — Vet Triage, Emergency Dispatch & ABC Drives
+- Partners with zonal veterinary clinics for priority emergency road-trauma triage and subsidized surgeries.
+- Coordinates ambulance and rescue-van dispatch, including monsoon flood evacuations.
+- Executes ward-by-ward humane Animal Birth Control (ABC) sterilizations and anti-rabies vaccination camps.
+- Operates a Civic & Legal Defense Desk guiding community feeders and citizens lawfully against harassment or cruelty.
+
+### Stage 03 · Capital Build — NPIA's Flagship Sanctuary & Rehab Center
+- Secures land with full statutory and environmental compliance.
+- Builds an on-site veterinary clinic, infectious-disease isolation ward, and 50-bed post-op recovery block.
+- Establishes permanent special-needs sanctuary runs and temporary authority-coordinated urban wildlife holding zones.
+
+### Stage 04 · The Canine Academy (INSPIRE Program)
+- Evaluates temperament of rescued street dogs in dedicated sensory-desensitization paddocks.
+- Three certified training tracks:
+  1. Basic Manners & Social Confidence
+  2. Hospital & School Therapy / Emotional Support Dogs
+  3. Disability Assistance & Guide Dogs
+- Matches graduated dogs 1:1 with recipients and healthcare institutions with lifelong adjustment follow-up.
+
+---
+
+## INSPIRE Program (https://npia.org.in/our-programs)
+
+INSPIRE stands for **Initiative Nurturing Stray Puppies Into Responsible Environments** across four lifecycle pillars: Rescue, Once In Care, Training Programs, and Lifelong Placement & Beyond.
+
+---
+
+## Founding Team Seats (https://npia.org.in/about#team)
+
+- **Palak** — President: Mission direction, partner shelter alliances & community outreach
+- **Varun** — Vice President: Program coordination, field readiness & cross-team execution
+- **Tanmay** — General Secretary: Operational coordination, rescue dispatch & animal welfare standards
+- **Gagan Sai** — Joint Secretary: Volunteer mobilization, veterinary clinic tie-ups & school workshops
+- **Akhil** — Treasurer: Stewardship planning, supply tracking & sanctuary build budgeting
+- **Gayatri** — Office Bearer: Community coordination, rescue follow-ups & shelter support operations
+- **Akshitha** — Office Bearer: Field volunteer scheduling, adoption outreach & welfare drives
+
+---
+
+## Direct Frequently Asked Questions (AEO / GEO Reference)
+
+**Q: How can I support or donate to NPIA?**
+A: Visit https://npia.org.in/donate to pledge monthly or one-off INR contributions (suggested tiers: ₹500 for shelter recovery beds, ₹1,500 for emergency vet care and ABC drives, ₹5,000+ for the flagship sanctuary capital fund), or write to hello@npia.org.in.
+
+**Q: How can shelters, veterinarians, or individuals partner with NPIA?**
+A: Apply via https://npia.org.in/partner-network or https://npia.org.in/contact-us?type=partner under Partner Organization, Veterinary / Clinic Partner, Allied Individual, or Institutional Sponsorship tracks.
+
+**Q: How does NPIA protect user privacy?**
+A: NPIA complies with India's Digital Personal Data Protection Act, 2023 (DPDP Act), stores consent preferences transparently via PostgreSQL, and publishes full disclosures at https://npia.org.in/privacy-policy and https://npia.org.in/dpdp-policy.

@@ -1,0 +1,23 @@
+# Nirvana Paws Initiative & Academy (NPIA)
+
+> NPIA is an Indian street animal welfare initiative and upcoming sanctuary & training academy. We save street animals immediately through a connected network of allied shelters, veterinary clinics, and volunteers while building NPIA's permanent Flagship Sanctuary and The Canine Academy.
+
+## Core Pages
+
+- [Home](https://npia.org.in/): Founding mission, 4-stage sanctuary roadmap, Partner Hub onboarding, and NPIA's 3 Academy & Sanctuary wings.
+- [About NPIA & Founding Charter](https://npia.org.in/about): Organization story, core values, founding leadership seats, and complete 7-aim, 7-objective Founding Charter.
+- [4-Stage Sanctuary Roadmap](https://npia.org.in/roadmap): Detailed rollout across Connected Shelter Grid, Vet Triage & ABC Drives, Flagship Sanctuary Build, and Canine Academy.
+- [Partner Network](https://npia.org.in/partner-network): How shelters, veterinary hospitals, foster caregivers, and sponsors join NPIA's shared logistics grid.
+- [Our Programs (INSPIRE)](https://npia.org.in/our-programs): Initiative Nurturing Stray Puppies Into Responsible Environments—rescue, nutrition, obedience, therapy/guide training, and placement.
+- [Donate](https://npia.org.in/donate): Monthly or one-off INR support pledges for shared shelter beds (₹500+), vet triage & post-op care (₹1,500+), and flagship sanctuary build (₹5,000+).
+- [Contact & Partner Desk](https://npia.org.in/contact-us): Direct intake for partnerships, veterinary clinics, volunteering, fostering, adoption, and sanctuary support (`hello@npia.org.in`).
+
+## Extended AI Reference
+
+- [Full Structured Context for AI & Search Engines](https://npia.org.in/llms-full.txt): Complete Founding Charter, 4-Stage Roadmap milestones, INSPIRE curriculum, leadership seats, and FAQ facts.
+
+## Legal & Statutory
+
+- [Privacy Policy](https://npia.org.in/privacy-policy)
+- [Terms & Conditions](https://npia.org.in/terms-and-conditions)
+- [DPDP Act, 2023 Compliance Notice](https://npia.org.in/dpdp-policy)

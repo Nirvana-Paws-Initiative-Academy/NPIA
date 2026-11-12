@@ -1,15 +1,27 @@
-import type { Metadata } from "next";
 import { LegalDocumentLayout } from "@/components/Legal/LegalDocumentLayout";
+import { JsonLd } from "@/components/SEO/JsonLd";
+import { buildPageMetadata, getLegalSchemaGraph } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+const DESCRIPTION =
+  "Nirvana Paws Initiative & Academy (NPIA) Digital Personal Data Protection Act, 2023 (DPDP Act) Notice, Data Principal rights, consent withdrawal, and grievance redressal.";
+
+export const metadata = buildPageMetadata({
   title: "DPDP Act 2023 Compliance Notice | NPIA",
-  description:
-    "Nirvana Paws Initiative & Academy (NPIA) Digital Personal Data Protection Act, 2023 (DPDP Act) Notice, Data Principal rights, consent withdrawal, and grievance redressal.",
-};
+  description: DESCRIPTION,
+  path: "/dpdp-policy",
+});
 
 export default function DpdpPolicyPage() {
   return (
-    <LegalDocumentLayout
+    <>
+      <JsonLd
+        data={getLegalSchemaGraph({
+          path: "/dpdp-policy",
+          title: "DPDP Act 2023 Compliance Notice | NPIA",
+          description: DESCRIPTION,
+        })}
+      />
+      <LegalDocumentLayout
       badge="Statutory Compliance · India"
       title="DPDP Act, 2023 Compliance"
       subtitle="NPIA respects the Digital Personal Data Protection Act, 2023 (DPDP Act) and guarantees clear consent, purpose limitation, and accessible rights for every Data Principal."
@@ -65,5 +77,6 @@ export default function DpdpPolicyPage() {
         },
       ]}
     />
+    </>
   );
 }

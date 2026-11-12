@@ -175,9 +175,9 @@ export const CookieConsentBanner: React.FC = () => {
           onClick={() => setCustomizeOpen(true)}
           aria-label="Manage Cookie and DPDP Preferences"
           title="Cookie Preferences"
-          className="fixed bottom-4 right-[76px] z-[95] w-12 h-12 rounded-full border-2 border-[#4AA552] bg-[#102412] text-[#E2FFE4] shadow-[0_10px_28px_rgba(11,28,14,0.38)] flex items-center justify-center hover:scale-105 hover:bg-[#245736] transition-all cursor-pointer"
+          className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 sm:bottom-4 sm:left-4 z-[95] w-9 h-9 rounded-full border-[1.5px] border-[#4AA552] bg-[#102412]/95 text-[#E2FFE4] shadow-[0_8px_22px_rgba(11,28,14,0.34)] flex items-center justify-center hover:scale-105 hover:bg-[#245736] transition-all cursor-pointer"
         >
-          <Cookie className="w-5 h-5 text-[#E2FFE4]" aria-hidden="true" />
+          <Cookie className="w-4 h-4 text-[#E2FFE4]" aria-hidden="true" />
         </button>
       )}
 

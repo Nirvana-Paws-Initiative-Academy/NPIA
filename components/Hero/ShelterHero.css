@@ -599,11 +599,12 @@
   }
 
   .hero .ui {
-    padding: 20px 18px max(78px, calc(env(safe-area-inset-bottom) + 64px));
+    padding: 20px 18px max(62px, calc(env(safe-area-inset-bottom) + 52px));
   }
 
   .hero .bar {
-    grid-template-columns: auto auto;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     font-size: 14px;
   }
@@ -612,6 +613,7 @@
     font-size: 23px;
   }
 
+  .hero .bar > nav,
   .hero .links,
   .hero .side-link,
   .hero .cta.cta-outline {

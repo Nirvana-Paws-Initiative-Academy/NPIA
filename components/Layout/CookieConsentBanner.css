@@ -46,7 +46,7 @@
 
 @media (max-width: 640px) {
   .npia-consent-banner {
-    bottom: max(76px, calc(env(safe-area-inset-bottom) + 72px));
+    bottom: max(56px, calc(env(safe-area-inset-bottom) + 52px));
     padding: 0.9rem 1rem;
   }
 

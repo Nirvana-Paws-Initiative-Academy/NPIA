@@ -140,7 +140,7 @@
 
 /* Oversized ghost heading inside Values/Trust section */
 .about-ghost-heading {
-  font-size: clamp(2.15rem, 7.6vw, 7.5rem);
+  font-size: clamp(1.45rem, 6.2vw, 7.5rem);
   font-weight: 500;
   text-transform: uppercase;
   line-height: 1.02;

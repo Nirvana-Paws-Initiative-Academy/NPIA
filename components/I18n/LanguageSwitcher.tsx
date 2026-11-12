@@ -37,13 +37,13 @@ export const LanguageSwitcher: React.FC = () => {
     <div
       ref={rootRef}
       data-no-translate="true"
-      className="fixed bottom-4 right-4 z-[96] font-['Instrument_Sans',sans-serif]"
+      className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] right-3 sm:bottom-4 sm:right-4 z-[96] font-['Instrument_Sans',sans-serif]"
     >
       {open && (
         <div
           role="dialog"
           aria-label="Choose website language"
-          className="absolute bottom-14 right-0 w-56 max-w-[calc(100vw-2rem)] max-h-[60svh] overflow-y-auto rounded-2xl border border-[#E2FFE4]/30 bg-[#0B1C0E]/95 p-2 text-[#FAFFFD] shadow-2xl backdrop-blur-xl"
+          className="absolute bottom-11 right-0 w-56 max-w-[calc(100vw-2rem)] max-h-[60svh] overflow-y-auto rounded-2xl border border-[#E2FFE4]/30 bg-[#0B1C0E]/95 p-2 text-[#FAFFFD] shadow-2xl backdrop-blur-xl"
         >
           <p className="px-2.5 py-1.5 text-[11px] font-medium uppercase tracking-wider text-[#B2DCB3]">
             Language · भाषा
@@ -89,10 +89,10 @@ export const LanguageSwitcher: React.FC = () => {
         aria-expanded={open}
         title={`Language: ${current.nativeName}`}
         onClick={() => setOpen((prev) => !prev)}
-        className="relative w-12 h-12 rounded-full border-2 border-[#4AA552] bg-[#102412] text-[#FAFFFD] shadow-[0_10px_28px_rgba(11,28,14,0.38)] flex items-center justify-center hover:scale-105 hover:bg-[#245736] transition-all cursor-pointer"
+        className="relative w-9 h-9 rounded-full border-[1.5px] border-[#4AA552] bg-[#102412]/95 text-[#FAFFFD] shadow-[0_8px_22px_rgba(11,28,14,0.34)] flex items-center justify-center hover:scale-105 hover:bg-[#245736] transition-all cursor-pointer"
       >
-        <Languages className="w-5 h-5 text-[#E2FFE4]" aria-hidden="true" />
-        <span className="absolute -top-1.5 -right-1.5 rounded-full border border-[#102412] bg-[#E2FFE4] px-1.5 py-0.5 text-[9px] font-bold uppercase leading-none text-[#102412] shadow-sm">
+        <Languages className="w-4 h-4 text-[#E2FFE4]" aria-hidden="true" />
+        <span className="absolute -top-1 -right-1 rounded-full border border-[#102412] bg-[#E2FFE4] px-1 py-[1px] text-[8px] font-bold uppercase leading-none text-[#102412] shadow-sm">
           {current.code}
         </span>
       </button>

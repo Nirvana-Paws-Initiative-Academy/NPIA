@@ -431,7 +431,7 @@
     align-items: flex-start;
     gap: 1rem;
     padding-top: clamp(2rem, 6vh, 3rem);
-    padding-bottom: clamp(1rem, 2.5vh, 1.75rem);
+    padding-bottom: max(3.5rem, calc(env(safe-area-inset-bottom) + 3rem));
   }
   .legal {
     gap: .85rem 1.35rem;

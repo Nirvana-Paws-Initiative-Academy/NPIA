@@ -150,12 +150,33 @@ export function renderTemplate(
   });
 }
 
+export function resolveDatabaseUrl(rawUrl: string | undefined): string {
+  if (!rawUrl) return "";
+  const trimmed = rawUrl.trim();
+  // Supabase direct host has only IPv6 records; rewrite to IPv4 pooler if needed on serverless
+  if (trimmed.includes("db.ueuamgptnbandavcitxw.supabase.co")) {
+    return trimmed
+      .replace(
+        /postgres:[^@]+@db\.ueuamgptnbandavcitxw\.supabase\.co:5432/,
+        (match) => {
+          const pass = match.split(":")[1]?.split("@")[0] || "U%40s.%3F2bMdRHAe2G";
+          return `postgres.ueuamgptnbandavcitxw:${pass}@aws-1-ap-northeast-2.pooler.supabase.com:6543`;
+        }
+      )
+      .replace(
+        "db.ueuamgptnbandavcitxw.supabase.co:5432",
+        "aws-1-ap-northeast-2.pooler.supabase.com:6543"
+      );
+  }
+  return trimmed;
+}
+
 export function getPool(): Pool {
   if (globalThis.__npiaPgPool) {
     return globalThis.__npiaPgPool;
   }
 
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = resolveDatabaseUrl(process.env.DATABASE_URL);
   if (!connectionString) {
     throw new Error("DATABASE_URL environment variable is not set");
   }

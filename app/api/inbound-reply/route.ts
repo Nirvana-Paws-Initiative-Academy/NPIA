@@ -9,6 +9,7 @@ import {
   formatTeamRelayEmail,
   getMailConfig,
   htmlToPlainText,
+  normalizeEmail,
   parseAddressEntry,
   sendMailtrapEmail,
   stripQuotedReply,
@@ -147,6 +148,7 @@ function normalizeSinglePayload(item: Record<string, unknown>): NormalizedInboun
     parseAddressEntry(item.From) ||
     parseAddressEntry(item.sender) ||
     parseAddressEntry(envelope?.from) ||
+    parseAddressEntry(envelope?.mailFrom) ||
     (typeof item.from_email === "string"
       ? parseAddressEntry({ email: item.from_email, name: item.from_name })
       : null);
@@ -165,11 +167,13 @@ function normalizeSinglePayload(item: Record<string, unknown>): NormalizedInboun
       ...collectEmailStrings(item.recipients),
       ...collectEmailStrings(item.rcptTo),
       ...collectEmailStrings(item.recipient),
+      ...collectEmailStrings(item.destination),
       ...collectEmailStrings(item.ToFull),
       ...collectEmailStrings(item.CcFull),
       ...collectEmailStrings(item.To),
       ...collectEmailStrings(item.OriginalRecipient),
       ...collectEmailStrings(envelope?.to),
+      ...collectEmailStrings(envelope?.recipients),
       ...readHeaderAddresses(item.headers ?? item.Headers),
     ])
   );
@@ -251,13 +255,28 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  await ensureDatabaseSchema();
+  try {
+    await ensureDatabaseSchema();
+  } catch (dbInitErr) {
+    console.error("Warning: ensureDatabaseSchema error in inbound-reply:", dbInitErr);
+  }
+
   const pool = getPool();
   const results: Array<{ status: string; submissionId?: number }> = [];
 
   for (const msg of messages) {
-    const relayToken = extractRelayToken(msg.recipientAddresses, msg.subject);
+    const combinedContent = `${msg.text}\n${msg.html}`;
+    const relayToken = extractRelayToken(
+      msg.recipientAddresses,
+      msg.subject,
+      combinedContent
+    );
+
     if (!relayToken) {
+      console.warn("Ignored inbound email: no relay token found in recipients, subject, or body", {
+        recipients: msg.recipientAddresses,
+        subject: msg.subject,
+      });
       results.push({ status: "ignored_no_relay_token" });
       continue;
     }
@@ -271,14 +290,41 @@ export async function POST(req: NextRequest) {
       continue;
     }
 
-    const subRes = await pool.query<SubmissionRecord>(
-      `SELECT id, name, email, category, message, relay_token
-       FROM contact_submissions
-       WHERE relay_token = $1
-       LIMIT 1`,
-      [relayToken]
-    );
-    const submission = subRes.rows[0];
+    let submission: SubmissionRecord | null = null;
+    try {
+      const subRes = await pool.query<SubmissionRecord>(
+        `SELECT id, name, email, category, message, relay_token
+         FROM contact_submissions
+         WHERE relay_token = $1
+         LIMIT 1`,
+        [relayToken]
+      );
+      submission = subRes.rows[0] || null;
+    } catch (queryErr) {
+      console.error("Failed querying contact_submissions for relay token:", queryErr);
+    }
+
+    // Fallback: If submission wasn't found in DB (e.g. historical test prior to DB pooler fix),
+    // extract visitor email and name from the quoted email thread
+    if (!submission) {
+      const emailMatch = combinedContent.match(
+        /(?:<strong>Email:<\/strong>|\bEmail:)\s*<?(?:mailto:)?([^\s<>"'@]+@[^\s<>"']+\.[^\s<>"']+)>?/i
+      );
+      const nameMatch = combinedContent.match(
+        /(?:<strong>Name:<\/strong>|\bName:)\s*([^\n<]+)/i
+      );
+      if (emailMatch) {
+        submission = {
+          id: 0,
+          name: nameMatch ? nameMatch[1].trim() : "Visitor",
+          email: emailMatch[1].trim().toLowerCase(),
+          category: "General Inquiry",
+          message: "",
+          relay_token: relayToken,
+        };
+      }
+    }
+
     if (!submission) {
       results.push({ status: "ignored_unknown_token" });
       continue;
@@ -302,8 +348,12 @@ export async function POST(req: NextRequest) {
         : msg.recipientAddresses.find((a) => a.toLowerCase().includes(relayToken)) ||
           config.senderEmail;
 
+    const fromNormalized = normalizeEmail(msg.fromEmail);
+    const isTeamSender = config.allowedTeamSenders.has(fromNormalized);
+    const isVisitorSender = fromNormalized === normalizeEmail(visitorEmail);
+
     // Route 1: Authorized NPIA team member replying from personal inbox -> send to visitor as NPIA
-    if (config.allowedTeamSenders.has(msg.fromEmail)) {
+    if (isTeamSender) {
       const formatted = formatNpiaReplyEmail({
         visitorName: submission.name,
         replyText,
@@ -322,23 +372,25 @@ export async function POST(req: NextRequest) {
         category: `${submission.category} Reply`,
       });
 
-      await pool
-        .query(
-          `INSERT INTO contact_messages (
-            submission_id, direction, from_email, from_name, to_emails, subject, text_body, mail_status, mail_error
-          ) VALUES ($1, 'outbound_to_visitor', $2, $3, $4, $5, $6, $7, $8)`,
-          [
-            submission.id,
-            msg.fromEmail,
-            msg.fromName || null,
-            [visitorEmail],
-            formatted.subject,
-            replyText,
-            sendResult.ok ? "sent" : "failed",
-            sendResult.ok ? null : sendResult.error.slice(0, 400),
-          ]
-        )
-        .catch(() => {});
+      if (submission.id > 0) {
+        await pool
+          .query(
+            `INSERT INTO contact_messages (
+              submission_id, direction, from_email, from_name, to_emails, subject, text_body, mail_status, mail_error
+            ) VALUES ($1, 'outbound_to_visitor', $2, $3, $4, $5, $6, $7, $8)`,
+            [
+              submission.id,
+              msg.fromEmail,
+              msg.fromName || null,
+              [visitorEmail],
+              formatted.subject,
+              replyText,
+              sendResult.ok ? "sent" : "failed",
+              sendResult.ok ? null : sendResult.error.slice(0, 400),
+            ]
+          )
+          .catch(() => {});
+      }
 
       if (!sendResult.ok) {
         return NextResponse.json(
@@ -384,7 +436,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Route 2: Original visitor replying back -> fan out to all team recipients
-    if (msg.fromEmail === visitorEmail) {
+    if (isVisitorSender) {
       const forward = formatTeamRelayEmail({
         heading: `Follow-up reply from ${submission.name}`,
         category: submission.category,
@@ -407,23 +459,25 @@ export async function POST(req: NextRequest) {
         category: `${submission.category} Follow-up`,
       });
 
-      await pool
-        .query(
-          `INSERT INTO contact_messages (
-            submission_id, direction, from_email, from_name, to_emails, subject, text_body, mail_status, mail_error
-          ) VALUES ($1, 'inbound_from_visitor', $2, $3, $4, $5, $6, $7, $8)`,
-          [
-            submission.id,
-            msg.fromEmail,
-            submission.name,
-            config.allTeamRecipients,
-            forward.subject,
-            replyText,
-            sendResult.ok ? "sent" : "failed",
-            sendResult.ok ? null : sendResult.error.slice(0, 400),
-          ]
-        )
-        .catch(() => {});
+      if (submission.id > 0) {
+        await pool
+          .query(
+            `INSERT INTO contact_messages (
+              submission_id, direction, from_email, from_name, to_emails, subject, text_body, mail_status, mail_error
+            ) VALUES ($1, 'inbound_from_visitor', $2, $3, $4, $5, $6, $7, $8)`,
+            [
+              submission.id,
+              msg.fromEmail,
+              submission.name,
+              config.allTeamRecipients,
+              forward.subject,
+              replyText,
+              sendResult.ok ? "sent" : "failed",
+              sendResult.ok ? null : sendResult.error.slice(0, 400),
+            ]
+          )
+          .catch(() => {});
+      }
 
       if (!sendResult.ok) {
         return NextResponse.json(

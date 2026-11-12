@@ -127,9 +127,20 @@ export async function POST(req: NextRequest) {
     message,
   };
 
-  const subject = renderTemplate(template.subject_template, templateVars, false);
-  const textBody = renderTemplate(template.text_template, templateVars, false);
-  const htmlBody = renderTemplate(template.html_template, templateVars, true);
+  const baseSubject = renderTemplate(template.subject_template, templateVars, false);
+  const subject = config.relayDomain
+    ? `${baseSubject} [Ref: ${relayToken}]`
+    : baseSubject;
+
+  const renderedText = renderTemplate(template.text_template, templateVars, false);
+  const textBody = config.relayDomain
+    ? `${renderedText}\n\n[Ref: ${relayToken}]`
+    : renderedText;
+
+  const renderedHtml = renderTemplate(template.html_template, templateVars, true);
+  const htmlBody = config.relayDomain
+    ? `${renderedHtml}<div style="display:none;font-size:0;line-height:0;color:transparent;mso-hide:all;" aria-hidden="true">[Ref: ${relayToken}]</div>`
+    : renderedHtml;
 
   const replyToAddress = config.relayDomain
     ? {

@@ -3,6 +3,15 @@ import { escapeHtml } from "@/lib/db/postgres";
 
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * Normalizes an email for comparison: lowercase, trim, and equate googlemail.com to gmail.com.
+ */
+export function normalizeEmail(email: string | undefined | null): string {
+  if (!email) return "";
+  const lower = email.trim().toLowerCase();
+  return lower.replace(/@googlemail\.com$/, "@gmail.com");
+}
+
 export interface MailAddress {
   email: string;
   name?: string;
@@ -67,10 +76,8 @@ export function getMailConfig(): MailConfig {
   );
 
   const extraAllowed = parseEmailList(process.env.MAILTRAP_ALLOWED_REPLY_FROM);
-  const allowedTeamSenders = new Set<string>([
-    ...allTeamRecipients,
-    ...extraAllowed,
-  ]);
+  const rawAllowed = [...allTeamRecipients, ...extraAllowed];
+  const allowedTeamSenders = new Set<string>(rawAllowed.map(normalizeEmail));
 
   const relayDomain = (process.env.MAILTRAP_RELAY_DOMAIN || "")
     .trim()
@@ -102,22 +109,29 @@ export function buildRelayAddress(relayToken: string, relayDomain: string): stri
 }
 
 /**
- * Extracts a submission relay token from recipient email addresses or subject line.
+ * Extracts a submission relay token from recipient email addresses, subject line, or body.
  */
 export function extractRelayToken(
   addresses: string[],
-  subject?: string
+  subject?: string,
+  body?: string
 ): string | null {
   for (const addr of addresses) {
-    const match = addr.match(/reply\+(npia-[a-f0-9]{12,32})@/i);
+    const match = addr.match(/(?:reply[+._-]?)?(npia-[a-f0-9]{12,32})/i);
     if (match?.[1]) {
       return match[1].toLowerCase();
     }
   }
   if (subject) {
-    const subjMatch = subject.match(/\[Ref:\s*(npia-[a-f0-9]{12,32})\]/i);
+    const subjMatch = subject.match(/\b(npia-[a-f0-9]{12,32})\b/i);
     if (subjMatch?.[1]) {
       return subjMatch[1].toLowerCase();
+    }
+  }
+  if (body) {
+    const bodyMatch = body.match(/\b(npia-[a-f0-9]{12,32})\b/i);
+    if (bodyMatch?.[1]) {
+      return bodyMatch[1].toLowerCase();
     }
   }
   return null;

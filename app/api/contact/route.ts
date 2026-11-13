@@ -149,11 +149,20 @@ export async function POST(req: NextRequest) {
       }
     : { email, name };
 
+  // Route directly to real team mailboxes (excluding the unhosted hello@npia.org.in sending address)
+  // to ensure email clients reply solely to reply+<token>@inbound.npia.org.in and avoid MX bounce errors.
+  const teamInboxes = config.allTeamRecipients.filter(
+    (addr) => addr !== config.senderEmail
+  );
+  const toRecipients =
+    teamInboxes.length > 0
+      ? teamInboxes.map((addr) => ({ email: addr }))
+      : config.primaryRecipients.map((addr) => ({ email: addr }));
+
   const sendResult = await sendMailtrapEmail({
     token: config.token,
     from: { email: config.senderEmail, name: config.senderName },
-    to: config.primaryRecipients.map((addr) => ({ email: addr })),
-    bcc: config.bccRecipients.map((addr) => ({ email: addr })),
+    to: toRecipients,
     replyTo: replyToAddress,
     subject,
     text: textBody,

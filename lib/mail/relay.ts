@@ -295,17 +295,40 @@ export function formatNpiaReplyEmail(params: {
   const html = `
     <div style="font-family:Inter,Arial,sans-serif;background:#F4FAF5;padding:24px;color:#102412;">
       <div style="max-width:580px;margin:0 auto;background:#FFFFFF;border:1px solid #D4E8D6;border-radius:16px;padding:24px;">
-        <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B714C;">
-          NPIA. · ${escapeHtml(params.category)}
-        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;width:100%;">
+          <tr>
+            <td style="vertical-align:middle;width:44px;padding-right:12px;">
+              <a href="https://npia.org.in" style="text-decoration:none;display:block;">
+                <img src="https://npia.org.in/logo-square.png" width="40" height="40" alt="NPIA" style="display:block;border-radius:10px;border:1px solid #D4E8D6;" />
+              </a>
+            </td>
+            <td style="vertical-align:middle;">
+              <div style="font-size:15px;font-weight:700;color:#102412;line-height:1.2;">
+                Nirvana Paws Initiative &amp; Academy
+              </div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B714C;margin-top:2px;">
+                NPIA. · ${escapeHtml(params.category)}
+              </div>
+            </td>
+          </tr>
+        </table>
         <div style="font-size:15px;line-height:1.65;color:#102412;white-space:pre-wrap;">${escapeHtml(cleanBody)}</div>
         <hr style="margin:22px 0 16px;border:0;border-top:1px solid #E2EDE3;" />
-        <p style="margin:0;font-size:13px;font-weight:600;color:#102412;">
-          Nirvana Paws Initiative &amp; Academy
-        </p>
-        <p style="margin:4px 0 0;font-size:12px;color:#4B714C;">
-          hello@npia.org.in · <a href="https://npia.org.in" style="color:#245736;text-decoration:none;">npia.org.in</a>
-        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="vertical-align:middle;padding-right:10px;">
+              <img src="https://npia.org.in/logo-square.png" width="28" height="28" alt="NPIA" style="display:block;border-radius:6px;" />
+            </td>
+            <td style="vertical-align:middle;">
+              <p style="margin:0;font-size:13px;font-weight:600;color:#102412;">
+                Nirvana Paws Initiative &amp; Academy (NPIA.)
+              </p>
+              <p style="margin:2px 0 0;font-size:12px;color:#4B714C;">
+                <a href="mailto:hello@npia.org.in" style="color:#245736;text-decoration:none;">hello@npia.org.in</a> · <a href="https://npia.org.in" style="color:#245736;text-decoration:none;">npia.org.in</a>
+              </p>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   `.trim();
@@ -335,9 +358,23 @@ export function formatTeamRelayEmail(params: {
   const html = `
     <div style="font-family:Inter,Arial,sans-serif;background:#F4FAF5;padding:24px;color:#102412;">
       <div style="max-width:580px;margin:0 auto;background:#FFFFFF;border:1px solid #D4E8D6;border-radius:16px;padding:24px;">
-        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B714C;">
-          NPIA. · ${escapeHtml(params.category)}
-        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;width:100%;">
+          <tr>
+            <td style="vertical-align:middle;width:44px;padding-right:12px;">
+              <a href="https://npia.org.in" style="text-decoration:none;display:block;">
+                <img src="https://npia.org.in/logo-square.png" width="40" height="40" alt="NPIA" style="display:block;border-radius:10px;border:1px solid #D4E8D6;" />
+              </a>
+            </td>
+            <td style="vertical-align:middle;">
+              <div style="font-size:15px;font-weight:700;color:#102412;line-height:1.2;">
+                Nirvana Paws Initiative &amp; Academy
+              </div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B714C;margin-top:2px;">
+                NPIA. · ${escapeHtml(params.category)}
+              </div>
+            </td>
+          </tr>
+        </table>
         <h2 style="margin:0 0 14px;font-size:18px;color:#102412;">
           ${escapeHtml(params.heading)}
         </h2>

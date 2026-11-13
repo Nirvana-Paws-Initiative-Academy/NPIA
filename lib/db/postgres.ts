@@ -35,9 +35,23 @@ const DEFAULT_TEMPLATES: EmailTemplateRow[] = [
     html_template: `
       <div style="font-family:Inter,Arial,sans-serif;background:#F4FAF5;padding:24px;color:#102412;">
         <div style="max-width:560px;margin:0 auto;background:#FFFFFF;border:1px solid #D4E8D6;border-radius:16px;padding:24px;">
-          <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B714C;">
-            NPIA. · {{category}}
-          </p>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;">
+            <tr>
+              <td style="vertical-align:middle;padding-right:12px;">
+                <a href="https://npia.org.in" style="text-decoration:none;">
+                  <img src="https://npia.org.in/logo-square.png" width="40" height="40" alt="NPIA" style="display:block;border-radius:10px;border:1px solid #D4E8D6;" />
+                </a>
+              </td>
+              <td style="vertical-align:middle;">
+                <div style="font-size:14px;font-weight:700;color:#102412;line-height:1.2;">
+                  Nirvana Paws Initiative &amp; Academy
+                </div>
+                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B714C;margin-top:2px;">
+                  NPIA. · {{category}}
+                </div>
+              </td>
+            </tr>
+          </table>
           <h2 style="margin:0 0 18px;font-size:20px;color:#102412;">
             New message from {{name}}
           </h2>
@@ -74,9 +88,23 @@ const DEFAULT_TEMPLATES: EmailTemplateRow[] = [
     html_template: `
       <div style="font-family:Inter,Arial,sans-serif;background:#0B1C0E;padding:24px;color:#FAFFFD;">
         <div style="max-width:560px;margin:0 auto;background:#102412;border:1px solid #4AA552;border-radius:16px;padding:24px;">
-          <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B2DCB3;">
-            NPIA. · Partner Network
-          </p>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;">
+            <tr>
+              <td style="vertical-align:middle;padding-right:12px;">
+                <a href="https://npia.org.in" style="text-decoration:none;">
+                  <img src="https://npia.org.in/logo-square.png" width="40" height="40" alt="NPIA" style="display:block;border-radius:10px;border:1px solid #4AA552;" />
+                </a>
+              </td>
+              <td style="vertical-align:middle;">
+                <div style="font-size:14px;font-weight:700;color:#FAFFFD;line-height:1.2;">
+                  Nirvana Paws Initiative &amp; Academy
+                </div>
+                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B2DCB3;margin-top:2px;">
+                  NPIA. · Partner Network
+                </div>
+              </td>
+            </tr>
+          </table>
           <h2 style="margin:0 0 18px;font-size:20px;color:#FAFFFD;">
             Partnership proposal from {{name}}
           </h2>
@@ -110,9 +138,23 @@ const DEFAULT_TEMPLATES: EmailTemplateRow[] = [
     html_template: `
       <div style="font-family:Inter,Arial,sans-serif;background:#EAF5EB;padding:24px;color:#102412;">
         <div style="max-width:560px;margin:0 auto;background:#FFFFFF;border:1px solid #4B714C;border-radius:16px;padding:24px;">
-          <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#245736;">
-            NPIA. · Sanctuary Fund Pledge
-          </p>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;">
+            <tr>
+              <td style="vertical-align:middle;padding-right:12px;">
+                <a href="https://npia.org.in" style="text-decoration:none;">
+                  <img src="https://npia.org.in/logo-square.png" width="40" height="40" alt="NPIA" style="display:block;border-radius:10px;border:1px solid #4B714C;" />
+                </a>
+              </td>
+              <td style="vertical-align:middle;">
+                <div style="font-size:14px;font-weight:700;color:#102412;line-height:1.2;">
+                  Nirvana Paws Initiative &amp; Academy
+                </div>
+                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#245736;margin-top:2px;">
+                  NPIA. · Sanctuary Fund Pledge
+                </div>
+              </td>
+            </tr>
+          </table>
           <h2 style="margin:0 0 18px;font-size:20px;color:#102412;">
             Contribution inquiry from {{name}}
           </h2>

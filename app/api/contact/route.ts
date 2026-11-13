@@ -149,20 +149,33 @@ export async function POST(req: NextRequest) {
       }
     : { email, name };
 
-  // Route directly to real team mailboxes (excluding the unhosted hello@npia.org.in sending address)
-  // to ensure email clients reply solely to reply+<token>@inbound.npia.org.in and avoid MX bounce errors.
+  // Keep all team personal mailboxes completely hidden from each other by delivering via BCC.
+  // The visible To: is addressed to the per-thread desk relay address, which ensures:
+  // 1. Team personal emails are 100% private (BCC).
+  // 2. Any "Reply" or "Reply All" is strictly targeted to reply+<token>@inbound.npia.org.in,
+  //    preventing any bounce from an unhosted root hello@npia.org.in address.
   const teamInboxes = config.allTeamRecipients.filter(
     (addr) => addr !== config.senderEmail
   );
-  const toRecipients =
+  const targetBcc =
     teamInboxes.length > 0
       ? teamInboxes.map((addr) => ({ email: addr }))
-      : config.primaryRecipients.map((addr) => ({ email: addr }));
+      : config.bccRecipients.map((addr) => ({ email: addr }));
+
+  const targetTo = config.relayDomain
+    ? [
+        {
+          email: buildRelayAddress(relayToken, config.relayDomain),
+          name: `${name} via NPIA Desk`,
+        },
+      ]
+    : config.primaryRecipients.map((addr) => ({ email: addr }));
 
   const sendResult = await sendMailtrapEmail({
     token: config.token,
     from: { email: config.senderEmail, name: config.senderName },
-    to: toRecipients,
+    to: targetTo,
+    bcc: targetBcc,
     replyTo: replyToAddress,
     subject,
     text: textBody,
